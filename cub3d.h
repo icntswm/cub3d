@@ -10,6 +10,7 @@
 
 typedef struct s_data
 {
+    char    player;
     char    *repfile;
     char    *no;
     char    *so;
@@ -27,8 +28,16 @@ void	reaplace_file(t_data *data, int fd_file);
 void	map_parser(char *file);
 int     make_hex(char **hex);
 void	handling_data(t_data *data);
-void	handling_floar_and_ceiling(int i, t_data *data);
+void	read_map(int i, t_data *data);
+void    map_error(int size, t_data *data);
+//bool
+bool	i_is_zero_color(int i, char a, t_data *data);
+bool	i_isnt_zero_color(int i, char a, t_data *data);
+bool	i_is_zero_cmp(int i, char *arg, t_data *data);
+bool	i_isnt_zero_cmp(int i, char *arg, t_data *data);
+//error
 void	ft_error(t_data *data, char *error);
+//cleaning
 void	cleaning(t_data *data);
 void	free_array(char **array);
 

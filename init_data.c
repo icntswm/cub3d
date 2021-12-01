@@ -2,6 +2,7 @@
 
 void	init_data(t_data *data)
 {
+	data->player = '\0';
 	data->repfile = NULL;
 	data->no = NULL;
 	data->so = NULL;

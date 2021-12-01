@@ -53,21 +53,6 @@ int	data_clipping(int i, t_data *data, char **str, char *comp)
 	return (i);
 }
 
-bool	i_is_zero_cmp(int i, char *arg, t_data *data)
-{
-	return (data->repfile[i] == arg[0] && data->repfile[i + 1] == arg[1]
-		&& (data->repfile[i + 2] == ' ' || data->repfile[i + 2] == '\t'
-			|| data->repfile[i + 2] == '\n'));
-}
-
-bool	i_isnt_zero_cmp(int i, char *arg, t_data *data)
-{
-	return (data->repfile[i] == arg[0] && data->repfile[i + 1] == arg[1]
-		&& (data->repfile[i - 1] == ' ' || data->repfile[i - 1] == '\t'
-			|| data->repfile[i - 1] == '\n') && (data->repfile[i + 2] == ' '
-			|| data->repfile[i + 2] == '\t' || data->repfile[i + 2] == '\n'));
-}
-
 int	data_validation(t_data *data)
 {
 	int	i;
@@ -92,20 +77,6 @@ int	data_validation(t_data *data)
 		i++;
 	}
 	return (0);
-}
-
-bool	i_is_zero_color(int i, char a, t_data *data)
-{
-	return (data->repfile[i] == a && (data->repfile[i + 1] == ' '
-			|| data->repfile[i + 1] == '\t' || data->repfile[i + 1] == '\n'));
-}
-
-bool	i_isnt_zero_color(int i, char a, t_data *data)
-{
-	return ((data->repfile[i - 1] == ' ' || data->repfile[i - 1] == '\t'
-			|| data->repfile[i - 1] == '\n') && data->repfile[i] == a
-		&& (data->repfile[i + 1] == ' ' || data->repfile[i + 1] == '\t'
-			|| data->repfile[i + 1] == '\n'));
 }
 
 int	param_selection(int i, t_data *data)
@@ -135,71 +106,6 @@ int	param_selection(int i, t_data *data)
 	else if (i > 0 && i_isnt_zero_color(i, 'C', data))
 		i = data_clipping(i + 1, data, &data->ceiling, "C");
 	return (i);
-}
-
-int	check_size_map(int i, t_data *data)
-{
-	int size;
-
-	size = 0;
-	while (data->repfile[i])
-	{
-		if (data->repfile[i] == '\n' || data->repfile[i] == EOF)
-			size++;
-		i++;
-	}
-	printf("SIZE: %d\n", size);
-	return (size);
-}
-
-int	check_n(int i, t_data *data, char **map_elem)
-{
-	int start;
-
-	start = i;
-	while (data->repfile[i] && data->repfile[i] != '\n')
-		++i;
-	*map_elem = ft_substr(data->repfile, start, i - start);
-	if (data->repfile[i] == '\n')
-		++i;
-	return (i);
-}
-
-void	make_array_map(int i, t_data *data)
-{
-	int	save_i;
-	int	size;
-	int	j;
-
-	j = 0;
-	save_i = i;
-	size = check_size_map(i, data);
-	i = save_i;
-	data->map = (char **)malloc(sizeof(char *) * (size + 2));
-	while (i > 0 && data->repfile[i - 1] != '\n')
-		--i;
-	while (j < size + 1)
-	{
-		i = check_n(i, data, &data->map[j]);
-		printf("%d|%s\n", j, data->map[j]);
-		++j;
-	}
-	data->map[j] = NULL;
-}
-void	read_map(int i, t_data *data)
-{
-	while (data->repfile[i] && (data->repfile[i] == ' '
-		|| data->repfile[i] == '\t' || data->repfile[i] == '\n'))
-		++i;
-	if (data->repfile[i] != '1' && data->repfile[i] != '0')
-		ft_error(data, "incorr");
-	else
-	{
-		if (data->repfile[i] == '0')
-			ft_error(data, "open_map");
-		else
-			make_array_map(i, data);
-	}
 }
 
 void	handling_data(t_data *data)

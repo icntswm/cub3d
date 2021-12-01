@@ -23,5 +23,9 @@ void	ft_error(t_data *data, char *error)
 		write(2, "Error: F/C should only contain numbers and a sep ','\n", 53);
 	else if (ft_strncmp(error, "open_map", 8) == 0)
 		write(2, "Error: open map\n", 16);
+	else if (ft_strncmp(error, "player_mul", 10) == 0)
+		write(2, "Error: multiple players on the map\n", 35);
+	else if (ft_strncmp(error, "player", 6) == 0)
+		write(2, "Error: player not found\n", 24);
 	exit (1);
 }
