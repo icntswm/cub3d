@@ -31,7 +31,8 @@ int	data_clipping(int i, t_data *data, char **str, char *comp)
 	start = 0;
 	if (*str)
 		ft_error(data, "rep_param");
-	check_previous_compass(data, comp);
+	// check_previous_compass(data, comp);
+	(void)comp;
 	while (data->repfile[i] && (data->repfile[i] == ' '
 			|| data->repfile[i] == '\t'))
 		i++;
