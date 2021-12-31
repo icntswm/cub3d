@@ -35,9 +35,10 @@ void    map_error(int size, t_data *data)
                 ft_error(data, "incorr");
             if (data->map[j][i] == '0')
             {
-                if (!data->map[j - 1][i] || (data->map[j - 1][i] && (data->map[j - 1][i] == ' ' || data->map[j - 1][i] == '\t')))
+                if ((data->map[j - 1] && ft_strlen(data->map[j - 1]) < i) || (data->map[j - 1][i] && (data->map[j - 1][i] == ' ' || data->map[j - 1][i] == '\t')))
                     ft_error(data, "open_map");
-                if (!data->map[j + 1][i] || (data->map[j + 1][i] && (data->map[j + 1][i] == ' ' || data->map[j + 1][i] == '\t')))
+                if ((data->map[j + 1] && ft_strlen(data->map[j + 1]) < i)
+                    || (data->map[j + 1][i] && (data->map[j + 1][i] == ' ' || data->map[j + 1][i] == '\t')))
                     ft_error(data, "open_map");
             }
             if (data->map[j][i] && (data->map[j][i] == 'N' || data->map[j][i] == 'S' || data->map[j][i] == 'E' || data->map[j][i] == 'W'))
