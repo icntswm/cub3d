@@ -125,12 +125,12 @@ void	handling_data(t_data *data)
 			break ;
 		i++;
 	}
-	printf("NO: |%s|\n", data->no);
-	printf("SO: |%s|\n", data->so);
-	printf("WE: |%s|\n", data->we);
-	printf("EA: |%s|\n", data->ea);
-	printf("F: |%s|\n", data->floor);
-	printf("C: |%s|\n", data->ceiling);
+	// printf("NO: |%s|\n", data->no);
+	// printf("SO: |%s|\n", data->so);
+	// printf("WE: |%s|\n", data->we);
+	// printf("EA: |%s|\n", data->ea);
+	// printf("F: |%s|\n", data->floor);
+	// printf("C: |%s|\n", data->ceiling);
 	data_validation(data);
 	read_map(i, data);
 }

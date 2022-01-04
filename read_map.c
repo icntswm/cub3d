@@ -52,7 +52,7 @@ int	make_array_map(int i, t_data *data)
 	while (j < size + 1)
 	{
 		i = check_n(i, data, &data->map[j]);
-		printf("%d|%s\n", j, data->map[j]);
+		// printf("%d|%s\n", j, data->map[j]);
 		++j;
 	}
 	data->map[j] = NULL;

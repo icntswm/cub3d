@@ -25,7 +25,7 @@ typedef struct s_data
 int     main(int argc, char **argv);
 void	init_data(t_data *data);
 void	reaplace_file(t_data *data, int fd_file);
-void	map_parser(char *file);
+void	map_parser(char *file, t_data *data);
 int     make_hex(char **hex);
 void	handling_data(t_data *data);
 void	read_map(int i, t_data *data);

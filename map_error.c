@@ -7,7 +7,7 @@ void    map_error(int size, t_data *data)
 
     i = 0;
     (void)size;
-    printf("SIZE: %d\n", size);
+    // printf("SIZE: %d\n", size);
     while (data->map[0][i])
     {
         if (data->map[0][i] != '1' && data->map[0][i] != ' ' && data->map[0][i] != '\t')
@@ -17,7 +17,7 @@ void    map_error(int size, t_data *data)
     j = 1;
     while (data->map[j])
     {
-        printf("map[%d]: %s\n", j, data->map[j]);
+        // printf("map[%d]: %s\n", j, data->map[j]);
         i = 0;
         while (data->map[j][i] && (data->map[j][i] == ' ' || data->map[j][i] == '\t'))
             i++;
@@ -52,7 +52,7 @@ void    map_error(int size, t_data *data)
         j++;
         if (!data->map[j + 1])
         {
-            printf("map[%d]: %s\n", j, data->map[j]);
+            // printf("map[%d]: %s\n", j, data->map[j]);
             i = 0;
             while (data->map[j][i])
             {
@@ -65,5 +65,5 @@ void    map_error(int size, t_data *data)
     }
     if (!data->player)
         ft_error(data, "player");
-    printf("player: %c\n", data->player);
+    // printf("player: %c\n", data->player);
 }
