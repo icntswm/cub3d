@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkenned <fkenned@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: fkenned <fkenned@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 19:01:50 by fkenned           #+#    #+#             */
-/*   Updated: 2021/11/30 20:00:40 by fkenned          ###   ########.fr       */
+/*   Updated: 2022/01/06 18:54:02 by fkenned          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	**ft_split(char const *ss, char c)
 	int		col;
 	char	**array;
 	char	*s;
-	
+
 	if (!ss)
 		return (NULL);
 	s = (char *)ss;

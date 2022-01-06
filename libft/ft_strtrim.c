@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkenned <fkenned@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: fkenned <fkenned@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 17:36:57 by fkenned           #+#    #+#             */
-/*   Updated: 2021/11/30 20:00:57 by fkenned          ###   ########.fr       */
+/*   Updated: 2022/01/06 18:54:11 by fkenned          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	ft_str_chr(const char *str, char a)
 	}
 	return (0);
 }
-#include <stdio.h>
+
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*str;
