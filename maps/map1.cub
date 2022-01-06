@@ -5,8 +5,8 @@
     WE         ../textures/path_to_the_west_texture
   SO    ../textures/path_to_the_south_texture 
 
-			F 			220,11,12
-    C                           225,30,1
+			F 			205,205,100
+    C                           25,30,210
 
     111111111111 11111111
     11000000001011100011111        
