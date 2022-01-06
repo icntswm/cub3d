@@ -22,3 +22,5 @@ int	main(int argc, char **argv)
 	// cleaning(&data);
 	return (0);
 }
+
+// gcc *.c ../libft/*.c ../get_next_line/*.c -Wall -Wextra -Werror
