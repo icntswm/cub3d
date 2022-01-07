@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 void	check_path_around_player(t_data *data)
 {
@@ -9,13 +9,13 @@ void	check_path_around_player(t_data *data)
 	while (data->map[i])
 	{
 		j = 0;
-		while (data->map[i][j] && data->map[i][j] != data->player)
+		while (data->map[i][j] && data->map[i][j] != data->player_char)
 			j++;
-		if (data->map[i][j] == data->player)
+		if (data->map[i][j] == data->player_char)
 			break ;
 		i++;
 	}
-	// printf("position player: %d|%d\n", i, j);
+	// printf("position player_char: %d|%d\n", i, j);
 	if (!((data->map[i - 1] && data->map[i - 1][j] == '0')
 		|| (data->map[i + 1] && data->map[i + 1][j] == '0')
 		|| data->map[i][j - 1] == '0' || data->map[i][j + 1] == '0'))
@@ -52,9 +52,9 @@ void	check_error(t_data *data, int j, int i)
 				|| (data->map[j + 1][i] && check_s_t(data->map[j + 1][i], 0)))
 				ft_error(data, "open_map");
 		}
-		if (data->map[j][i] && check_plr(data->map[j][i]) && !data->player)
-			data->player = data->map[j][i];
-		else if (data->map[j][i] && check_plr(data->map[j][i]) && data->player)
+		if (data->map[j][i] && check_plr(data->map[j][i]) && !data->player_char)
+			data->player_char = data->map[j][i];
+		else if (data->map[j][i] && check_plr(data->map[j][i]) && data->player_char)
 			ft_error(data, "player_mul");
 		i++;
 		if ((check_s_t(data->map[j][i], 0) || data->map[j][i] == '\n'
@@ -88,7 +88,7 @@ void	map_error(t_data *data)
 			break ;
 		}
 	}
-	if (!data->player)
-		ft_error(data, "player");
+	if (!data->player_char)
+		ft_error(data, "player_char");
 	check_path_around_player(data);
 }

@@ -1,8 +1,11 @@
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 int	keyhook(int keycode)
 {
+	printf("keycode: %d\n", keycode);
 	if (keycode == 53)
+		exit(0);
+	if (keycode == 65307)//linux(ESC)
 		exit(0);
 	return (0);
 }
@@ -17,7 +20,7 @@ void	ft_print_data(t_data *data)
 	printf("EA: %s\n", data->ea);
 	printf("F: %d\n", data->floor);
 	printf("C: %d\n", data->ceiling);
-	printf("player: %c\n", data->player);
+	printf("player: %c\n", data->player_char);
 }
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
@@ -56,6 +59,13 @@ void	make_background_image(t_data *data)
 int	render_image(t_data *data)
 {
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->tex.background.img, 0, 0);
+	return (0);
+}
+
+int	ft_exit(t_data *data)
+{
+	mlx_destroy_window (data->mlx.mlx, data->mlx.win);
+	exit (0);
 }
 
 int	main(int argc, char **argv)
@@ -72,7 +82,7 @@ int	main(int argc, char **argv)
 	make_background_image(&data);
 	data.mlx.win = mlx_new_window(data.mlx.mlx, HEIGHT, WIDTH, "Cub3d");
 	mlx_key_hook(data.mlx.win, keyhook, NULL);
-	mlx_hook(data.mlx.win, 17, 0, exit, NULL);//change!!
+	// mlx_hook(data.mlx.win, 17, 0, exit, NULL);//change!!
 	mlx_loop_hook(data.mlx.mlx, render_image, &data);
 	mlx_loop(data.mlx.mlx);
 	// ft_print_data(&data);
@@ -81,3 +91,4 @@ int	main(int argc, char **argv)
 }
 
 // gcc *.c ../libft/*.c ../get_next_line/*.c -Wall -Wextra -Werror
+// gcc *.c ../libft/*.c ../get_next_line/*.c -Wall -Wextra -Werror -I ../minilibx/ -L ../minilibx/ -lmlx -lm -lbsd -lX11 -lXext

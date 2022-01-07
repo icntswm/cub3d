@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 int	to_hex(int r, int g, int b)
 {
@@ -54,10 +54,8 @@ int	color_handling3(int i, int start, t_data *data, char **array_atoi)
 
 int	color_handling2(int i, t_data *data, char **array_atoi)
 {
-	int	j;
 	int	start;
 
-	j = 0;
 	start = 0;
 	while (data->repfile[i] && data->repfile[i] != '\n')
 	{

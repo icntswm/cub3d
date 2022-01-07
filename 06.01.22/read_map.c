@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 int	check_size_map(int i, t_data *data)
 {
@@ -60,9 +60,6 @@ void	make_array_map(int i, t_data *data)
 
 void	read_map(int i, t_data *data)
 {
-	int	size;
-
-	size = 0;
 	while (data->repfile[i] && (data->repfile[i] == ' '
 			|| data->repfile[i] == '\t' || data->repfile[i] == '\n'))
 		++i;

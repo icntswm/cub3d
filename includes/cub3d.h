@@ -49,7 +49,7 @@ typedef struct s_mlx
 
 typedef struct s_data
 {
-	char			player_char;//!!!!!!!!!
+	char			player_char;
 	char			*repfile;
 	char			*no;
 	char			*so;
