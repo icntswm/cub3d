@@ -1,4 +1,2 @@
 # cub3d
-'''
-cool
-'''
+`cool`
