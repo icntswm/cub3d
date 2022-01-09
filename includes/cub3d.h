@@ -1,14 +1,15 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include "../libft/libft.h"
-#include "../get_next_line/get_next_line.h"
-#include <limits.h>
-#include <mlx.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdbool.h>
+# include "../libft/libft.h"
+# include "get_next_line.h"
+# include <limits.h>
+# include <mlx.h>
+# include <math.h>
 
 # define HEIGHT 1280
 # define WIDTH 720
@@ -30,6 +31,17 @@ typedef struct s_player
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	camera;
+	double	map_x;
+	double	map_y;
+	double	side_dest_x;
+	double	side_dest_y;
+	double	delta_dest_x;
+	double	delta_dest_y;
+	double	wall_dist;
+	int		hit;
 }			t_player;
 
 typedef struct s_tex

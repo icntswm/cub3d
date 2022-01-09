@@ -1,12 +1,11 @@
-#include "../includes/cub3d.h"
+#include "cub3d.h"
 
 int	keyhook(int keycode)
 {
-	printf("keycode: %d\n", keycode);
 	if (keycode == 53)
 		exit(0);
-	if (keycode == 65307)//linux(ESC)
-		exit(0);
+	// if (keycode == 65307)//linux(ESC)
+	// 	exit(0);
 	return (0);
 }
 
@@ -65,7 +64,70 @@ int	render_image(t_data *data)
 int	ft_exit(t_data *data)
 {
 	mlx_destroy_window (data->mlx.mlx, data->mlx.win);
-	exit (0);
+	exit(0);
+}
+
+void	init_coords(t_data *data, int x, int y)
+{
+	if (data->player_char == 'N')
+		x = -1;
+	else if (data->player_char == 'S')
+		x = 1;
+	else if (data->player_char == 'E')
+		y = 1;
+	else
+		y = -1;
+	data->player.dir_x = x;
+	data->player.dir_y = y;
+	if (x)
+	{
+		data->player.plane_x = 0;
+		data->player.plane_y = 0.66;
+	}
+	else
+	{
+		data->player.plane_x = 0.66;
+		data->player.plane_y = 0;
+	}
+}
+
+void	init_player_data(t_data *data)
+{
+	int	i;
+	int	j;
+
+	init_coords(data, 0, 0);
+	i = 0;
+	while (data->map[i])
+	{
+		j = 0;
+		while (data->map[i][j])
+		{
+			if (data->map[i][j] == data->player_char)
+			{
+				data->player.y = (double)i + 0.5;
+				data->player.x = (double)j + 0.5;
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+int	raycaster(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < 512)
+	{
+		data->player.camera = 2 * (i / (double)512) - 1;
+		data->player.ray_dir_x = data->player.dir_x + data->player.plane_x * data->player.camera;
+		data->player.ray_dir_y = data->player.dir_y + data->player.plane_y * data->player.camera;
+		data->player.delta_dest_x = abs(1 / data->player.ray_dir_x);
+		data->player.delta_dest_y = abs(1 / data->player.ray_dir_y);
+	}
 }
 
 int	main(int argc, char **argv)
@@ -78,6 +140,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	map_parser(argv[1], &data);
+	init_player_data(&data);
 	data.mlx.mlx = mlx_init();
 	make_background_image(&data);
 	data.mlx.win = mlx_new_window(data.mlx.mlx, HEIGHT, WIDTH, "Cub3d");
