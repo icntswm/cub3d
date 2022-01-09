@@ -125,9 +125,10 @@ int	raycaster(t_data *data)
 		data->player.camera = 2 * (i / (double)512) - 1;
 		data->player.ray_dir_x = data->player.dir_x + data->player.plane_x * data->player.camera;
 		data->player.ray_dir_y = data->player.dir_y + data->player.plane_y * data->player.camera;
-		data->player.delta_dest_x = abs(1 / data->player.ray_dir_x);
-		data->player.delta_dest_y = abs(1 / data->player.ray_dir_y);
+		data->player.delta_dest_x = fabs(1 / data->player.ray_dir_x);
+		data->player.delta_dest_y = fabs(1 / data->player.ray_dir_y);
 	}
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -149,7 +150,7 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(data.mlx.mlx, render_image, &data);
 	mlx_loop(data.mlx.mlx);
 	// ft_print_data(&data);
-	// cleaning(&data);
+	cleaning(&data);
 	return (0);
 }
 

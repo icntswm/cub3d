@@ -1,4 +1,4 @@
-#include "../../includes/cub3d.h"
+#include "cub3d.h"
 
 int	check_size_map(int i, t_data *data)
 {
