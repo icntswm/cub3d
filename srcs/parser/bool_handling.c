@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "../../includes/cub3d.h"
 
 bool	i_is_zero_color(int i, char a, t_data *data)
 {

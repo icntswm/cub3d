@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "../../includes/cub3d.h"
 
 int	data_clipping(int i, t_data *data, char **str)
 {
