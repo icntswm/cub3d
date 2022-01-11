@@ -11,8 +11,9 @@
 # include <mlx.h>
 # include <math.h>
 
-# define HEIGHT 1280
-# define WIDTH 720
+# define HEIGHT 720
+# define WIDTH 1280
+# define WALL_HEIGHT 500
 
 typedef struct s_img
 {
@@ -34,19 +35,24 @@ typedef struct s_player
 	double	ray_dir_x;
 	double	ray_dir_y;
 	double	camera;
-	double	map_x;
-	double	map_y;
+	int		side;
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
 	double	side_dest_x;
 	double	side_dest_y;
 	double	delta_dest_x;
 	double	delta_dest_y;
 	double	wall_dist;
+	int		wall_height;
 	int		hit;
 }			t_player;
 
 typedef struct s_tex
 {
 	struct s_img	background;
+	struct s_img	tmp;
 	struct s_img	no;
 	struct s_img	ea;
 	struct s_img	so;
