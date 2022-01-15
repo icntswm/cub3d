@@ -13,7 +13,18 @@
 
 # define HEIGHT 720
 # define WIDTH 1280
-# define WALL_HEIGHT 500
+# define ESC 53
+# define W 13
+# define A 0
+# define S 1
+# define D 2
+# define UP 126
+# define LEFT 123
+# define DOWN 125
+# define RIGHT 124
+
+# define SPEED 0.25
+# define ROT_SPEED 0.15
 
 typedef struct s_img
 {
@@ -46,13 +57,14 @@ typedef struct s_player
 	double	delta_dest_y;
 	double	wall_dist;
 	int		wall_height;
+	int		draw_start;
+	int		draw_end;
 	int		hit;
 }			t_player;
 
 typedef struct s_tex
 {
 	struct s_img	background;
-	struct s_img	tmp;
 	struct s_img	no;
 	struct s_img	ea;
 	struct s_img	so;
@@ -81,7 +93,7 @@ typedef struct s_data
 	struct s_tex	tex;
 }					t_data;
 
-
+//----PARSER----
 int		main(int argc, char **argv);
 void	init_data(t_data *data);
 void	reaplace_file(t_data *data, int fd_file);
@@ -108,5 +120,8 @@ void	ft_error(t_data *data, char *error);
 //cleaning
 void	cleaning(t_data *data);
 void	free_array(char **array);
+//--------------
+
+int	keyhook(int keycode, t_data *data);
 
 #endif
