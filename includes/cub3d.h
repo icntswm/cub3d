@@ -33,6 +33,8 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		width;
+	int		height;
 }			t_img;
 
 typedef struct s_player
@@ -73,8 +75,12 @@ typedef struct s_tex
 
 typedef struct s_mlx
 {
-	void			*mlx;
-	void			*win;
+	void	*mlx;
+	void	*win;
+	int		prev_x_mouse;
+	int		prev_y_mouse;
+	int		view_height;
+	int		is_mouse_active;
 }					t_mlx;
 
 typedef struct s_data
@@ -122,6 +128,16 @@ void	cleaning(t_data *data);
 void	free_array(char **array);
 //--------------
 
-int	keyhook(int keycode, t_data *data);
+//----key.c----
+// void	move_forward(t_data *data);
+// void	move_backward(t_data *data);
+// void	turn_left(t_data *data);
+// void	turn_right(t_data *data);
+int		keyhook(int keycode, t_data *data);
+//-------------
+
+//----mouse.c----
+int		mousehook(int x, int y, t_data *data);
+int		small_mousehook(int button, int x, int y, t_data *data);
 
 #endif

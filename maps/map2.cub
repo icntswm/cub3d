@@ -1,9 +1,9 @@
 
-	  NO		 ../textures/path_to_the_north_texture 
+	  NO		 textures/apple1.xpm
 
-		EA 		../textures/path_to_the_east_texture		
-    WE         ../textures/path_to_the_west_texture
-  SO    ../textures/path_to_the_south_texture 
+		EA 		textures/exit1.xpm		
+    WE         textures/grass.xpm
+  SO    textures/tree1.xpm
 
 
 

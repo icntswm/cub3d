@@ -21,12 +21,20 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void	make_background_image(t_data *data)
+void	make_image(t_data *data, t_img *img)
 {
-	data->tex.background.img = mlx_new_image(data->mlx.mlx, WIDTH, HEIGHT);
-	data->tex.background.addr = mlx_get_data_addr(data->tex.background.img, \
-		&data->tex.background.bits_per_pixel, \
-		&data->tex.background.line_length, &data->tex.background.endian);
+	img->img = mlx_new_image(data->mlx.mlx, WIDTH, HEIGHT);
+	img->addr = mlx_get_data_addr(img->img, \
+		&img->bits_per_pixel, \
+		&img->line_length, &img->endian);
+}
+
+void	get_textures(t_data *data)
+{
+	data->tex.no.img = mlx_xpm_file_to_image(data->mlx.mlx, data->no, &data->tex.no.width, &data->tex.no.height);
+	data->tex.ea.img = mlx_xpm_file_to_image(data->mlx.mlx, data->ea, &data->tex.ea.width, &data->tex.ea.height);
+	data->tex.we.img = mlx_xpm_file_to_image(data->mlx.mlx, data->we, &data->tex.we.width, &data->tex.we.height);
+	data->tex.so.img = mlx_xpm_file_to_image(data->mlx.mlx, data->so, &data->tex.so.width, &data->tex.so.height);
 }
 
 int	ft_exit(t_data *data)
@@ -81,6 +89,8 @@ void	init_player_data(t_data *data)
 		}
 		i++;
 	}
+	data->mlx.prev_x_mouse = -1;
+	data->mlx.is_mouse_active = -1;
 }
 
 int	raycaster(t_data *data)
@@ -145,10 +155,10 @@ int	raycaster(t_data *data)
 
 		data->player.wall_height = (int)(HEIGHT / data->player.wall_dist);
 
-		data->player.draw_start = -data->player.wall_height / 2 + HEIGHT / 2;
+		data->player.draw_start = -data->player.wall_height / 2 + HEIGHT / 2 + data->mlx.view_height;
 		if(data->player.draw_start < 0)
 			data->player.draw_start = 0;
-		data->player.draw_end = data->player.wall_height / 2 + HEIGHT / 2;
+		data->player.draw_end = data->player.wall_height / 2 + HEIGHT / 2 + data->mlx.view_height;
 		if(data->player.draw_end >= HEIGHT)
 			data->player.draw_end = HEIGHT - 1;
 
@@ -160,7 +170,7 @@ int	raycaster(t_data *data)
 		{
 			if (j < data->player.draw_start || j > data->player.draw_end)
 			{
-				if (j < HEIGHT / 2)
+				if (j < HEIGHT / 2 + data->mlx.view_height)
 					my_mlx_pixel_put(&data->tex.background, i, j, data->ceiling);
 				else
 					my_mlx_pixel_put(&data->tex.background, i, j, data->floor);
@@ -176,6 +186,7 @@ int	render_image(t_data *data)
 {
 	raycaster(data);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->tex.background.img, 0, 0);
+	// mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->tex.no.img, 0, 0);
 	return (0);
 }
 
@@ -190,10 +201,14 @@ int	main(int argc, char **argv)
 	}
 	ft_memset(&data, 0, sizeof(t_data));
 	map_parser(argv[1], &data);
+	printf("%s\n", data.no);
 	init_player_data(&data);
+	// get_textures(&data);
 	data.mlx.mlx = mlx_init();
-	make_background_image(&data);
+	make_image(&data, &data.tex.background);
 	data.mlx.win = mlx_new_window(data.mlx.mlx, WIDTH, HEIGHT, "Cub3d");
+	// mlx_mouse_hook(data.mlx.win, small_mousehook, &data);
+	mlx_hook(data.mlx.win, 6, 0, mousehook, &data);
 	mlx_hook(data.mlx.win, 2, 0, keyhook, &data);
 	mlx_hook(data.mlx.win, 17, 0, ft_exit, &data);
 	mlx_loop_hook(data.mlx.mlx, render_image, &data);

@@ -57,3 +57,21 @@ int	keyhook(int keycode, t_data *data)
 		turn_right(data);
 	return (0);
 }
+
+/*
+void	turn_left(t_data *data)
+{
+	if (data->map[(int)(data->player.x + -sqrt(1 - pow(data->player.dir_x, 2)) * (SPEED + 0.1))][(int)(data->player.y)] != '1')
+		data->player.x += -sqrt(1 - pow(data->player.dir_x, 2)) * SPEED;
+	if (data->map[(int)(data->player.x)][(int)(data->player.y + -sqrt(1 - pow(data->player.dir_y, 2)) * (SPEED + 0.1))] != '1')
+		data->player.y += -sqrt(1 - pow(data->player.dir_y, 2)) * SPEED;
+}
+
+void	turn_right(t_data *data)
+{
+	if (data->map[(int)(data->player.x + sqrt(1 - pow(data->player.dir_x, 2)) * (SPEED + 0.1))][(int)(data->player.y)] != '1')
+		data->player.x += sqrt(1 - pow(data->player.dir_x, 2)) * SPEED;
+	if (data->map[(int)(data->player.x)][(int)(data->player.y + sqrt(1 - pow(data->player.dir_y, 2)) * (SPEED + 0.1))] != '1')
+		data->player.y += sqrt(1 - pow(data->player.dir_y, 2)) * SPEED;
+}
+*/
