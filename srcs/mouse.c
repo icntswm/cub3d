@@ -28,42 +28,35 @@ void	turn_mouse_right(t_data *data, double x)
 
 int	mousehook(int x, int y, t_data *data)
 {
-	// if (data->mlx.is_mouse_active == 1)
-	// {
-		if (data->mlx.prev_x_mouse == -1 || x < 0 || x > WIDTH || y < 0 || y > HEIGHT)
-		{
-			data->mlx.prev_x_mouse = x;
-			data->mlx.prev_y_mouse = y;
-			return (0);
-		}
-		if (x < data->mlx.prev_x_mouse)
-			turn_mouse_left(data, (double)(data->mlx.prev_x_mouse - x) / 200.0);
-		else if (x > data->mlx.prev_x_mouse)
-			turn_mouse_right(data, (double)(x - data->mlx.prev_x_mouse) / 200.0);
-
-		if (y < data->mlx.prev_y_mouse)
-			if (data->mlx.prev_y_mouse - y + data->mlx.view_height < 100)
-				data->mlx.view_height += data->mlx.prev_y_mouse - y;
-
-		if (y > data->mlx.prev_y_mouse)
-			if (y - data->mlx.prev_y_mouse + data->mlx.view_height > -100)
-				data->mlx.view_height -= y - data->mlx.prev_y_mouse;
-
-		// printf("y = %d\n", data->mlx.prev_y_mouse - y);
+	if (data->mlx.is_mouse_active == -1 || data->mlx.prev_x_mouse == -1 || x < 0 || x > WIDTH || y < 0 || y > HEIGHT)
+	{
 		data->mlx.prev_x_mouse = x;
 		data->mlx.prev_y_mouse = y;
-	// }
+		return (0);
+	}
+	if (x < data->mlx.prev_x_mouse)
+		turn_mouse_left(data, (double)(data->mlx.prev_x_mouse - x) / 200.0);
+	else if (x > data->mlx.prev_x_mouse)
+		turn_mouse_right(data, (double)(x - data->mlx.prev_x_mouse) / 200.0);
+
+	if (y < data->mlx.prev_y_mouse)
+		if (data->mlx.prev_y_mouse - y + data->mlx.view_height < 100)
+			data->mlx.view_height += data->mlx.prev_y_mouse - y;
+
+	if (y > data->mlx.prev_y_mouse)
+		if (y - data->mlx.prev_y_mouse + data->mlx.view_height > -100)
+			data->mlx.view_height -= y - data->mlx.prev_y_mouse;
+
+	data->mlx.prev_x_mouse = x;
+	data->mlx.prev_y_mouse = y;
 	return (0);
 }
 
-/*
 int	small_mousehook(int button, int x, int y, t_data *data)
 {
-	// printf("%d %d %d\n", button, x, y);
 	if (x < 0 || x > WIDTH || y < 0 || y > HEIGHT)
 		return (0);
-	if (button == 1)
-		printf("%d %d %d\n", button, x, y), data->mlx.is_mouse_active *= -1;
+	if (button == 1 || button == 2)
+		data->mlx.is_mouse_active *= -1;
 	return (0);
 }
-*/

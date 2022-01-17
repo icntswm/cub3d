@@ -11,8 +11,8 @@
 # include <mlx.h>
 # include <math.h>
 
-# define HEIGHT 720
-# define WIDTH 1280
+# define HEIGHT 1080
+# define WIDTH 1920
 # define ESC 53
 # define W 13
 # define A 0
@@ -23,8 +23,8 @@
 # define DOWN 125
 # define RIGHT 124
 
-# define SPEED 0.25
-# define ROT_SPEED 0.15
+# define SPEED 0.06
+# define ROT_SPEED 0.03
 
 typedef struct s_img
 {
@@ -59,6 +59,7 @@ typedef struct s_player
 	double	delta_dest_y;
 	double	wall_dist;
 	int		wall_height;
+	double	wall_hit;
 	int		draw_start;
 	int		draw_end;
 	int		hit;
@@ -83,6 +84,14 @@ typedef struct s_mlx
 	int		is_mouse_active;
 }					t_mlx;
 
+typedef struct s_keys
+{
+	int	forward;
+	int	backward;
+	int	left;
+	int	right;
+}		t_keys;
+
 typedef struct s_data
 {
 	char			player_char;
@@ -97,6 +106,7 @@ typedef struct s_data
 	struct s_mlx	mlx;
 	struct s_player	player;
 	struct s_tex	tex;
+	struct s_keys	keys;
 }					t_data;
 
 //----PARSER----
@@ -129,15 +139,20 @@ void	free_array(char **array);
 //--------------
 
 //----key.c----
-// void	move_forward(t_data *data);
-// void	move_backward(t_data *data);
-// void	turn_left(t_data *data);
-// void	turn_right(t_data *data);
+void	move_forward(t_data *data);
+void	move_backward(t_data *data);
+void	turn_left(t_data *data);
+void	turn_right(t_data *data);
 int		keyhook(int keycode, t_data *data);
+int		keyrelease(int keycode, t_data *data);
 //-------------
 
 //----mouse.c----
 int		mousehook(int x, int y, t_data *data);
 int		small_mousehook(int button, int x, int y, t_data *data);
+//---------------
+
+//----main.c----
+int		ft_exit(t_data *data);
 
 #endif

@@ -1,9 +1,9 @@
 
-	  NO		 textures/apple1.xpm
+	  NO		 ./textures/apple1.xpm
 
-		EA 		textures/exit1.xpm		
-    WE         textures/grass.xpm
-  SO    textures/tree1.xpm
+		EA 		./textures/exit1.xpm		
+    WE         ./textures/grass.xpm
+  SO    ./textures/tree1.xpm
 
 
 

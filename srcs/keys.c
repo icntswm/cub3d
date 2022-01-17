@@ -46,15 +46,28 @@ int	keyhook(int keycode, t_data *data)
 {
 	// printf("%d\n", keycode);
 	if (keycode == ESC)
-		exit(0);
+		ft_exit(data);
 	if (keycode == W || keycode == UP)
-		move_forward(data);
+		data->keys.forward = 1;
 	if (keycode == S || keycode == DOWN)
-		move_backward(data);
+		data->keys.backward = 1;
 	if (keycode == A || keycode == LEFT)
-		turn_left(data);
+		data->keys.left = 1;
 	if (keycode == D || keycode == RIGHT)
-		turn_right(data);
+		data->keys.right = 1;
+	return (0);
+}
+
+int	keyrelease(int keycode, t_data *data)
+{
+	if (keycode == W || keycode == UP)
+		data->keys.forward = 0;
+	if (keycode == S || keycode == DOWN)
+		data->keys.backward = 0;
+	if (keycode == A || keycode == LEFT)
+		data->keys.left = 0;
+	if (keycode == D || keycode == RIGHT)
+		data->keys.right = 0;
 	return (0);
 }
 
