@@ -61,7 +61,9 @@ typedef struct s_player
 	int		wall_height;
 	double	wall_hit;
 	int		draw_start;
+	int		wall_start;
 	int		draw_end;
+	int		wall_end;
 	int		hit;
 }			t_player;
 

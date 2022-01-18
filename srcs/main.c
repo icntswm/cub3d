@@ -23,13 +23,9 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 
 int	get_pixel_color(t_img *img, int x, int y)
 {
-	int pos;
 	int	color;
-
-	// printf("%d %d\n", x, y);
-	pos = (y * img->line_length + x * (img->bits_per_pixel / 8));
-	color = (int)img->addr[pos];
-	// color = (int)(img->addr);
+	
+	color = *(unsigned int*)(img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8)));
 	return (color);
 }
 
@@ -55,6 +51,7 @@ void	get_textures(t_data *data)
 	data->tex.we.addr = mlx_get_data_addr(data->tex.we.img, \
 		&data->tex.we.bits_per_pixel, \
 		&data->tex.we.line_length, &data->tex.we.endian);
+	printf("%d %d\n", data->tex.we.height, data->tex.we.width);
 	data->tex.so.img = mlx_xpm_file_to_image(data->mlx.mlx, data->so, &data->tex.so.width, &data->tex.so.height);
 	data->tex.so.addr = mlx_get_data_addr(data->tex.so.img, \
 		&data->tex.so.bits_per_pixel, \
@@ -119,22 +116,30 @@ void	init_player_data(t_data *data)
 
 void	put_line(t_data *data, int i)
 {
-	int	j;
+	int		j;
+	t_img	*img;
 
 	j = 0;
+	if (data->player.hit == 1)
+		img = &data->tex.no;
+	else if (data->player.hit == 2)
+		img = &data->tex.so;
+	else if (data->player.hit == 3)
+		img = &data->tex.we;
+	else
+		img = &data->tex.ea;
 	while (j < HEIGHT)
 	{
-		if (j < data->player.draw_start || j > data->player.draw_end)
-		{
-			if (j < HEIGHT / 2 + data->mlx.view_height)
-				my_mlx_pixel_put(&data->tex.background, i, j, data->ceiling);
-			else
-				my_mlx_pixel_put(&data->tex.background, i, j, data->floor);
-		}
+		if (j < data->player.draw_start)
+			my_mlx_pixel_put(&data->tex.background, i, j, data->ceiling);
+		else if (j >= data->player.draw_end)
+			my_mlx_pixel_put(&data->tex.background, i, j, data->floor);
 		else
-		{
-			my_mlx_pixel_put(&data->tex.background, i, j, get_pixel_color(&data->tex.no, data->tex.no.height / j, data->tex.no.width / i));
-		}
+			my_mlx_pixel_put(&data->tex.background, i, j, get_pixel_color(img, \
+				(int)((double)img->width * data->player.wall_hit), \
+				(int)((double)img->height / (double)(data->player.wall_end - \
+				data->player.wall_start) * (j - data->player.wall_start))));
+		j++;
 	}
 }
 
@@ -190,7 +195,22 @@ int	raycaster(t_data *data)
 				data->player.side = 1;
 			}
 			if (data->map[data->player.map_x][data->player.map_y] == '1')
-				data->player.hit = 1;
+			{
+				if (data->player.side == 0)
+				{
+					if ((double)data->player.map_x > data->player.x)
+						data->player.hit = 1;
+					else
+						data->player.hit = 2;
+				}
+				else
+				{
+					if ((double)data->player.map_y > data->player.y)
+						data->player.hit = 3;
+					else
+						data->player.hit = 4;
+				}
+			}
 		}
 
 		if(data->player.side == 0)
@@ -201,9 +221,11 @@ int	raycaster(t_data *data)
 		data->player.wall_height = (int)(HEIGHT / data->player.wall_dist);
 
 		data->player.draw_start = -data->player.wall_height / 2 + HEIGHT / 2 + data->mlx.view_height;
+		data->player.wall_start = data->player.draw_start;
 		if(data->player.draw_start < 0)
 			data->player.draw_start = 0;
 		data->player.draw_end = data->player.wall_height / 2 + HEIGHT / 2 + data->mlx.view_height;
+		data->player.wall_end = data->player.draw_end;
 		if(data->player.draw_end >= HEIGHT)
 			data->player.draw_end = HEIGHT - 1;
 
@@ -213,25 +235,7 @@ int	raycaster(t_data *data)
 			data->player.wall_hit = data->player.x + data->player.wall_dist * data->player.ray_dir_x;
 		data->player.wall_hit -= floor(data->player.wall_hit);
 		
-		int color = 0x000000FF;
-		if (data->player.side == 1)
-			color /= 2;
-
-		for (int j = 0; j < HEIGHT; j++)
-		{
-			if (j < data->player.draw_start || j > data->player.draw_end)
-			{
-				if (j < HEIGHT / 2 + data->mlx.view_height)
-					my_mlx_pixel_put(&data->tex.background, i, j, data->ceiling);
-				else
-					my_mlx_pixel_put(&data->tex.background, i, j, data->floor);
-			}
-			else
-				my_mlx_pixel_put(&data->tex.background, i, j, color);
-				// (int)((double)data->tex.no.width / (double)(j + 1))
-				// my_mlx_pixel_put(&data->tex.background, i, j, get_pixel_color(&data->tex.no, (int)((double)data->tex.no.width / (double)(j + 1)), (int)((double)data->tex.no.height / (double)(i + 1))));
-			// printf("%d\n", get_pixel_color(&data->tex.no, 15, 15));
-		}
+		put_line(data, i);//puts vertical line to the image
 	}
 	return (0);
 }
