@@ -6,7 +6,7 @@
 /*   By: fkenned <fkenned@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:56:54 by squickfi          #+#    #+#             */
-/*   Updated: 2022/01/19 16:10:00 by fkenned          ###   ########.fr       */
+/*   Updated: 2022/01/19 17:00:59 by fkenned          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ typedef struct s_keys
 
 typedef struct s_data
 {
-	char			player_char;
+	char			plr_ch;
 	char			*repfile;
 	char			*no;
 	char			*so;

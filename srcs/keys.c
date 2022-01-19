@@ -31,7 +31,7 @@ int	keyrelease(int keycode, t_data *data)
 
 void	press_keys(t_data *data)
 {
-	if (data->player_char == 'S' || data->player_char == 'W')
+	if (data->plr_ch == 'S' || data->plr_ch == 'W')
 	{
 		if (data->keys.left)
 			turn_right(data);

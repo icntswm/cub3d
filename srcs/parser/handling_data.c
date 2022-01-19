@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handling_data.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fkenned <fkenned@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/19 16:34:30 by fkenned           #+#    #+#             */
+/*   Updated: 2022/01/19 16:54:05 by fkenned          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 int	data_clipping(int i, t_data *data, char **str)
@@ -31,8 +43,8 @@ int	data_clipping(int i, t_data *data, char **str)
 void	data_validation(t_data *data)
 {
 	if (access(data->no, R_OK) || access(data->so, R_OK)
-			|| access(data->we, R_OK) || access(data->ea, R_OK))
-		ft_error(data, "text_error"); //check textures
+		|| access(data->we, R_OK) || access(data->ea, R_OK))
+		ft_error(data, "text_error");
 }
 
 int	param_selection(int i, t_data *data)
@@ -80,6 +92,6 @@ void	handling_data(t_data *data)
 			break ;
 		i++;
 	}
-	// data_validation(data);
+	data_validation(data);
 	read_map(i, data);
 }

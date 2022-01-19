@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bool_handling.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fkenned <fkenned@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/19 16:34:13 by fkenned           #+#    #+#             */
+/*   Updated: 2022/01/19 16:55:17 by fkenned          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 bool	i_is_zero_color(int i, char a, t_data *data)
@@ -27,22 +39,4 @@ bool	i_isnt_zero_cmp(int i, char *arg, t_data *data)
 		&& (data->repfile[i - 1] == ' ' || data->repfile[i - 1] == '\t'
 			|| data->repfile[i - 1] == '\n') && (data->repfile[i + 2] == ' '
 			|| data->repfile[i + 2] == '\t' || data->repfile[i + 2] == '\n'));
-}
-
-bool	check_fl_cel_error(char a)
-{
-	return (a != ' ' && a != '\t' && !(a >= '0' && a <= '9')
-		&& a != ',' && a != '\n');
-}
-
-bool	check_plr(char a)
-{
-	return (a == 'N' || a == 'S' || a == 'W' || a == 'E');
-}
-
-bool	check_s_t(char a, int check)
-{
-	if (check)
-		return (a != ' ' && a != '\t');
-	return (a == ' ' || a == '\t');
 }

@@ -1,26 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_error.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fkenned <fkenned@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/19 16:34:46 by fkenned           #+#    #+#             */
+/*   Updated: 2022/01/19 16:53:10 by fkenned          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
-
-void	check_path_around_player(t_data *data)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (data->map[i])
-	{
-		j = 0;
-		while (data->map[i][j] && data->map[i][j] != data->player_char)
-			j++;
-		if (data->map[i][j] == data->player_char)
-			break ;
-		i++;
-	}
-	// printf("position player_char: %d|%d\n", i, j);
-	if (!((data->map[i - 1] && data->map[i - 1][j] == '0')
-		|| (data->map[i + 1] && data->map[i + 1][j] == '0')
-		|| data->map[i][j - 1] == '0' || data->map[i][j + 1] == '0'))
-		ft_error(data, "path_player");
-}
 
 void	check_first_last_string(int j, t_data *data)
 {
@@ -52,9 +42,9 @@ void	check_error(t_data *data, int j, int i)
 				|| (data->map[j + 1][i] && check_s_t(data->map[j + 1][i], 0)))
 				ft_error(data, "open_map");
 		}
-		if (data->map[j][i] && check_plr(data->map[j][i]) && !data->player_char)
-			data->player_char = data->map[j][i];
-		else if (data->map[j][i] && check_plr(data->map[j][i]) && data->player_char)
+		if (data->map[j][i] && check_plr(data->map[j][i]) && !data->plr_ch)
+			data->plr_ch = data->map[j][i];
+		else if (data->map[j][i] && check_plr(data->map[j][i]) && data->plr_ch)
 			ft_error(data, "player_mul");
 		i++;
 		if ((check_s_t(data->map[j][i], 0) || data->map[j][i] == '\n'
@@ -88,7 +78,6 @@ void	map_error(t_data *data)
 			break ;
 		}
 	}
-	if (!data->player_char)
-		ft_error(data, "player_char");
-	// check_path_around_player(data);
+	if (!data->plr_ch)
+		ft_error(data, "plr_ch");
 }

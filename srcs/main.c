@@ -9,11 +9,11 @@ int	ft_exit(t_data *data)
 
 void	init_coords(t_data *data, int x, int y)
 {
-	if (data->player_char == 'N')
+	if (data->plr_ch == 'N')
 		x = -1;
-	else if (data->player_char == 'S')
+	else if (data->plr_ch == 'S')
 		x = 1;
-	else if (data->player_char == 'E')
+	else if (data->plr_ch == 'E')
 		y = 1;
 	else
 		y = -1;
@@ -43,7 +43,7 @@ void	init_player_data(t_data *data)
 		j = 0;
 		while (data->map[i][j])
 		{
-			if (data->map[i][j] == data->player_char)
+			if (data->map[i][j] == data->plr_ch)
 			{
 				data->player.y = (double)j + 0.5;
 				data->player.x = (double)i + 0.5;
@@ -70,7 +70,7 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	if (argc == 1 || argc > 2)
+	if (argc != 2)
 	{
 		write(2, "Error: too many/few arguments\n", 30);
 		return (1);

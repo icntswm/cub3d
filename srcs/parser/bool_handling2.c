@@ -1,42 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleaning.c                                         :+:      :+:    :+:   */
+/*   bool_handling2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkenned <fkenned@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/19 16:34:16 by fkenned           #+#    #+#             */
-/*   Updated: 2022/01/19 16:34:17 by fkenned          ###   ########.fr       */
+/*   Created: 2022/01/19 16:55:34 by fkenned           #+#    #+#             */
+/*   Updated: 2022/01/19 16:55:40 by fkenned          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	free_array(char **array)
+bool	check_fl_cel_error(char a)
 {
-	int	i;
-
-	i = 0;
-	while (array[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
+	return (a != ' ' && a != '\t' && !(a >= '0' && a <= '9')
+		&& a != ',' && a != '\n');
 }
 
-void	cleaning(t_data *data)
+bool	check_plr(char a)
 {
-	if (data->no)
-		free(data->no);
-	if (data->so)
-		free(data->so);
-	if (data->we)
-		free(data->we);
-	if (data->ea)
-		free(data->ea);
-	if (data->repfile)
-		free(data->repfile);
-	if (data->map)
-		free_array(data->map);
+	return (a == 'N' || a == 'S' || a == 'W' || a == 'E');
+}
+
+bool	check_s_t(char a, int check)
+{
+	if (check)
+		return (a != ' ' && a != '\t');
+	return (a == ' ' || a == '\t');
 }
