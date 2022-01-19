@@ -5,7 +5,7 @@
     WE         ./textures/we_tex.xpm
   SO    ./textures/so_tex.xpm
 
-			F 			210,80,,,,,,50
+			F 			210,80,,,,,50
     C                           25,30,210
 
     111111111111 11111111

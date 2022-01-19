@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cast_walls2.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: squickfi <squickfi@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/19 12:56:45 by squickfi          #+#    #+#             */
-/*   Updated: 2022/01/19 12:59:29 by squickfi         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "cub3d.h"
 
 void	find_wall_height(t_data *data)
@@ -75,8 +63,6 @@ static void	put_line_cycle(t_data *data, t_img *img, int i, int mirror)
 void	put_vertical_line(t_data *data, int i)
 {
 	t_img	*img;
-	int		x;
-	int		y;
 	int		mirror;
 
 	if (data->player.hit == 1 || data->player.hit == 4)

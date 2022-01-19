@@ -80,6 +80,6 @@ void	handling_data(t_data *data)
 			break ;
 		i++;
 	}
-	// data_validation(data);
+	data_validation(data);
 	read_map(i, data);
 }
