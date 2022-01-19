@@ -6,7 +6,7 @@
 /*   By: fkenned <fkenned@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:56:54 by squickfi          #+#    #+#             */
-/*   Updated: 2022/01/19 17:00:59 by fkenned          ###   ########.fr       */
+/*   Updated: 2022/01/19 18:47:51 by fkenned          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,8 @@ bool	check_fl_cel_error(char a);
 bool	check_plr(char a);
 //checking spaces and tabs
 bool	check_s_t(char a, int check);
+//checking .cub
+bool    check_cub(char *str);
 
 //error
 void	ft_error(t_data *data, char *error);

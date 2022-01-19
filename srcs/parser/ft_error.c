@@ -6,7 +6,7 @@
 /*   By: fkenned <fkenned@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 16:34:21 by fkenned           #+#    #+#             */
-/*   Updated: 2022/01/19 16:56:55 by fkenned          ###   ########.fr       */
+/*   Updated: 2022/01/19 18:54:59 by fkenned          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	ft_error2(char *error)
 		write(2, "Error\nmultiple players on the map\n", 34);
 	else if (ft_strncmp(error, "player", 6) == 0)
 		write(2, "Error\nplayer not found\n", 23);
+	else if (ft_strncmp(error, "ext", 6) == 0)
+		write(2, "Error\nwrong extension\n", 22);
 }
 
 void	ft_error(t_data *data, char *error)

@@ -10,18 +10,16 @@ HEADERS = cub3d.h
 
 MLX = -framework OpenGL -framework AppKit -lmlx -I includes/
 
-MAIN_SRC = cast_floor.c\
-		cast_walls.c\
+MAIN_SRC = cast_walls.c\
 		cast_walls2.c\
-		get_next_line\
 		keys.c\
 		key_funcs.c\
 		main.c\
 		mouse.c\
-		parser\
 		textures.c
 
 PARSER = bool_handling.c\
+		bool_handling2.c\
 		cleaning.c\
 		ft_error.c\
 		handling_color.c\
@@ -47,12 +45,12 @@ $(NAME): $(OBJ)
 	make -C libft
 	$(CC) $(MLX) $(LIBFT) $(OBJ) -o $(NAME)
 
-%.o: %.c $(HEADERS)
-	$(CC) $(FLAGS) -c $< -o $@
+%.o: %.c
+	$(CC) $(FLAGS) -I includes/ -c $< -o $@
 
 clean:
 	make fclean -C libft
-	rm -f $(OBJ) $(BONUS_OBJ)
+	rm -f $(OBJ)
 
 fclean: clean
 	rm -f $(NAME)

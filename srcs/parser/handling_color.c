@@ -6,7 +6,7 @@
 /*   By: fkenned <fkenned@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 16:34:26 by fkenned           #+#    #+#             */
-/*   Updated: 2022/01/19 16:34:27 by fkenned          ###   ########.fr       */
+/*   Updated: 2022/01/19 17:36:11 by fkenned          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	hext_char_to_int(t_data *data, char **array_atoi, char color)
 	else if (color == 'C')
 		data->ceiling = to_hex(r, g, b);
 }
+
 
 int	color_handling3(int i, int start, t_data *data, char **array_atoi)
 {

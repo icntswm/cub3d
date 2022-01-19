@@ -6,7 +6,7 @@
 /*   By: fkenned <fkenned@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 16:34:30 by fkenned           #+#    #+#             */
-/*   Updated: 2022/01/19 16:54:05 by fkenned          ###   ########.fr       */
+/*   Updated: 2022/01/19 18:55:03 by fkenned          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ void	data_validation(t_data *data)
 	if (access(data->no, R_OK) || access(data->so, R_OK)
 		|| access(data->we, R_OK) || access(data->ea, R_OK))
 		ft_error(data, "text_error");
+	if (!check_cub(data->no) || !check_cub(data->no)
+		|| !check_cub(data->we) || !check_cub(data->ea))
+		ft_error(data, "ext");
 }
 
 int	param_selection(int i, t_data *data)

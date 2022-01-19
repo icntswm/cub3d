@@ -2,7 +2,7 @@
 	 NO		 ./textures/no_tex.xpm
 
 		EA 		./textures/ea_tex.xpm		
-    WE         ./textures/we_tex.xpm
+    WE         ./textures/we_tex.xpt
   SO    ./textures/so_tex.xpm
 
     C                           25,30,210
