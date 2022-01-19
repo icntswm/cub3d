@@ -1,62 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: squickfi <squickfi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/19 12:57:26 by squickfi          #+#    #+#             */
+/*   Updated: 2022/01/19 13:23:22 by squickfi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
-
-void	ft_print_data(t_data *data)
-{
-	for(int i = 0; data->map[i]; i++)
-		printf("[%d]: %s\n", i, data->map[i]);
-	printf("NO: %s\n", data->no);
-	printf("SO: %s\n", data->so);
-	printf("WE: %s\n", data->we);
-	printf("EA: %s\n", data->ea);
-	printf("F: %d\n", data->floor);
-	printf("C: %d\n", data->ceiling);
-	printf("player: %c\n", data->player_char);
-}
-
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}
-
-int	get_pixel_color(t_img *img, int x, int y)
-{
-	int	color;
-	
-	color = *(unsigned int*)(img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8)));
-	return (color);
-}
-
-void	make_image(t_data *data, t_img *img)
-{
-	img->img = mlx_new_image(data->mlx.mlx, WIDTH, HEIGHT);
-	img->addr = mlx_get_data_addr(img->img, \
-		&img->bits_per_pixel, \
-		&img->line_length, &img->endian);
-}
-
-void	get_textures(t_data *data)
-{
-	data->tex.no.img = mlx_xpm_file_to_image(data->mlx.mlx, data->no, &data->tex.no.width, &data->tex.no.height);
-	data->tex.no.addr = mlx_get_data_addr(data->tex.no.img, \
-		&data->tex.no.bits_per_pixel, \
-		&data->tex.no.line_length, &data->tex.no.endian);
-	data->tex.ea.img = mlx_xpm_file_to_image(data->mlx.mlx, data->ea, &data->tex.ea.width, &data->tex.ea.height);
-	data->tex.ea.addr = mlx_get_data_addr(data->tex.ea.img, \
-		&data->tex.ea.bits_per_pixel, \
-		&data->tex.ea.line_length, &data->tex.ea.endian);
-	data->tex.we.img = mlx_xpm_file_to_image(data->mlx.mlx, data->we, &data->tex.we.width, &data->tex.we.height);
-	data->tex.we.addr = mlx_get_data_addr(data->tex.we.img, \
-		&data->tex.we.bits_per_pixel, \
-		&data->tex.we.line_length, &data->tex.we.endian);
-	printf("%d %d\n", data->tex.we.height, data->tex.we.width);
-	data->tex.so.img = mlx_xpm_file_to_image(data->mlx.mlx, data->so, &data->tex.so.width, &data->tex.so.height);
-	data->tex.so.addr = mlx_get_data_addr(data->tex.so.img, \
-		&data->tex.so.bits_per_pixel, \
-		&data->tex.so.line_length, &data->tex.so.endian);
-}
 
 int	ft_exit(t_data *data)
 {
@@ -114,150 +68,12 @@ void	init_player_data(t_data *data)
 	}
 }
 
-void	put_line(t_data *data, int i)
-{
-	int		j;
-	t_img	*img;
-
-	j = 0;
-	if (data->player.hit == 1)
-		img = &data->tex.no;
-	else if (data->player.hit == 2)
-		img = &data->tex.so;
-	else if (data->player.hit == 3)
-		img = &data->tex.we;
-	else
-		img = &data->tex.ea;
-	while (j < HEIGHT)
-	{
-		if (j < data->player.draw_start)
-			my_mlx_pixel_put(&data->tex.background, i, j, data->ceiling);
-		else if (j >= data->player.draw_end)
-			my_mlx_pixel_put(&data->tex.background, i, j, data->floor);
-		else
-			my_mlx_pixel_put(&data->tex.background, i, j, get_pixel_color(img, \
-				(int)((double)img->width * data->player.wall_hit), \
-				(int)((double)img->height / (double)(data->player.wall_end - \
-				data->player.wall_start) * (j - data->player.wall_start))));
-		j++;
-	}
-}
-
-int	raycaster(t_data *data)
-{
-	for (int i = 0; i < WIDTH; i++)
-	{
-		data->player.camera = 2 * i / (double)WIDTH - 1;
-		data->player.ray_dir_x = data->player.dir_x + data->player.plane_x * data->player.camera;
-    	data->player.ray_dir_y = data->player.dir_y + data->player.plane_y * data->player.camera;
-
-		data->player.map_x = (int)data->player.x;
-		data->player.map_y = (int)data->player.y;
-
-		data->player.delta_dest_x = fabs(1 / data->player.ray_dir_x);
-		data->player.delta_dest_y = fabs(1 / data->player.ray_dir_y);
-
-		if(data->player.ray_dir_x < 0)
-		{
-			data->player.step_x = -1;
-			data->player.side_dest_x = (data->player.x - (double)data->player.map_x) * data->player.delta_dest_x;
-		}
-		else
-		{
-			data->player.step_x = 1;
-			data->player.side_dest_x = ((double)data->player.map_x + 1.0 - data->player.x) * data->player.delta_dest_x;
-		}
-		if(data->player.ray_dir_y < 0)
-		{
-			data->player.step_y = -1;
-			data->player.side_dest_y = (data->player.y - (double)data->player.map_y) * data->player.delta_dest_y;
-		}
-		else
-		{
-			data->player.step_y = 1;
-			data->player.side_dest_y = ((double)data->player.map_y + 1.0 - data->player.y) * data->player.delta_dest_y;
-		}
-
-		data->player.hit = 0;
-
-		while (data->player.hit == 0)
-		{
-			if(data->player.side_dest_x < data->player.side_dest_y)
-			{
-				data->player.side_dest_x += data->player.delta_dest_x;
-				data->player.map_x += data->player.step_x;
-				data->player.side = 0;
-			}
-			else
-			{
-				data->player.side_dest_y += data->player.delta_dest_y;
-				data->player.map_y += data->player.step_y;
-				data->player.side = 1;
-			}
-			if (data->map[data->player.map_x][data->player.map_y] == '1')
-			{
-				if (data->player.side == 0)
-				{
-					if ((double)data->player.map_x > data->player.x)
-						data->player.hit = 1;
-					else
-						data->player.hit = 2;
-				}
-				else
-				{
-					if ((double)data->player.map_y > data->player.y)
-						data->player.hit = 3;
-					else
-						data->player.hit = 4;
-				}
-			}
-		}
-
-		if(data->player.side == 0)
-			data->player.wall_dist = (data->player.side_dest_x - data->player.delta_dest_x);
-		else
-			data->player.wall_dist = (data->player.side_dest_y - data->player.delta_dest_y);
-
-		data->player.wall_height = (int)(HEIGHT / data->player.wall_dist);
-
-		data->player.draw_start = -data->player.wall_height / 2 + HEIGHT / 2 + data->mlx.view_height;
-		data->player.wall_start = data->player.draw_start;
-		if(data->player.draw_start < 0)
-			data->player.draw_start = 0;
-		data->player.draw_end = data->player.wall_height / 2 + HEIGHT / 2 + data->mlx.view_height;
-		data->player.wall_end = data->player.draw_end;
-		if(data->player.draw_end >= HEIGHT)
-			data->player.draw_end = HEIGHT - 1;
-
-		if(data->player.side == 0)
-			data->player.wall_hit = data->player.y + data->player.wall_dist * data->player.ray_dir_y;
-		else
-			data->player.wall_hit = data->player.x + data->player.wall_dist * data->player.ray_dir_x;
-		data->player.wall_hit -= floor(data->player.wall_hit);
-		
-		put_line(data, i);//puts vertical line to the image
-	}
-	return (0);
-}
-
-void	press_keys(t_data *data)
-{
-	if (data->keys.forward)
-		move_forward(data);
-	if (data->keys.backward)
-		move_backward(data);
-	if (data->keys.left)
-		turn_left(data);
-	if (data->keys.right)
-		turn_right(data);
-}
-
 int	render_image(t_data *data)
 {
 	press_keys(data);
-	raycaster(data);
-	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->tex.background.img, 0, 0);
-	// mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->tex.no.img, data->tex.no.width, 0);
+	cast_walls(data);
+	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, \
+		data->tex.picture.img, 0, 0);
 	return (0);
 }
 
@@ -275,8 +91,7 @@ int	main(int argc, char **argv)
 	init_player_data(&data);
 	data.mlx.mlx = mlx_init();
 	get_textures(&data);
-	// data.mlx.is_mouse_active = -1;
-	make_image(&data, &data.tex.background);
+	make_image(&data, &data.tex.picture);
 	data.mlx.win = mlx_new_window(data.mlx.mlx, WIDTH, HEIGHT, "Cub3d");
 	mlx_mouse_hook(data.mlx.win, small_mousehook, &data);
 	mlx_hook(data.mlx.win, 6, 0, mousehook, &data);
@@ -288,6 +103,3 @@ int	main(int argc, char **argv)
 	cleaning(&data);
 	return (0);
 }
-
-// gcc *.c ../libft/*.c ../get_next_line/*.c ../main.c -Wall -Wextra -Werror
-// gcc *.c ../libft/*.c ../get_next_line/*.c -Wall -Wextra -Werror -I ../minilibx/ -L ../minilibx/ -lmlx -lm -lbsd -lX11 -lXext

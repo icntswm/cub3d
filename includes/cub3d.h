@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: squickfi <squickfi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/19 12:56:54 by squickfi          #+#    #+#             */
+/*   Updated: 2022/01/19 13:08:33 by squickfi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -47,7 +59,6 @@ typedef struct s_player
 	double	plane_y;
 	double	ray_dir_x;
 	double	ray_dir_y;
-	double	camera;
 	int		side;
 	int		map_x;
 	int		map_y;
@@ -67,9 +78,28 @@ typedef struct s_player
 	int		hit;
 }			t_player;
 
+typedef struct s_floor
+{
+	double	ray_dir_x_l;
+	double	ray_dir_y_l;
+	double	ray_dir_x_r;
+	double	ray_dir_y_r;
+	int		pos;
+	double	pos_z;
+	double	row_distance;
+	double	step_x;
+	double	step_y;
+	double	x;
+	double	y;
+	int		cell_x;
+	int		cell_y;
+	int		tex_x;
+	int		tex_y;
+}			t_floor;
+
 typedef struct s_tex
 {
-	struct s_img	background;
+	struct s_img	picture;
 	struct s_img	no;
 	struct s_img	ea;
 	struct s_img	so;
@@ -107,6 +137,7 @@ typedef struct s_data
 	char			**map;
 	struct s_mlx	mlx;
 	struct s_player	player;
+	struct s_floor	floor_cast;
 	struct s_tex	tex;
 	struct s_keys	keys;
 }					t_data;
@@ -140,14 +171,18 @@ void	cleaning(t_data *data);
 void	free_array(char **array);
 //--------------
 
-//----key.c----
+//----keys.c----
 void	move_forward(t_data *data);
 void	move_backward(t_data *data);
 void	turn_left(t_data *data);
 void	turn_right(t_data *data);
+//--------------
+
+//----key_funcs.c----
 int		keyhook(int keycode, t_data *data);
 int		keyrelease(int keycode, t_data *data);
-//-------------
+void	press_keys(t_data *data);
+//-------------------
 
 //----mouse.c----
 int		mousehook(int x, int y, t_data *data);
@@ -156,5 +191,27 @@ int		small_mousehook(int button, int x, int y, t_data *data);
 
 //----main.c----
 int		ft_exit(t_data *data);
+//--------------
+
+//----textures.c----
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+int		get_pixel_color(t_img *img, int x, int y);
+void	make_image(t_data *data, t_img *img);
+void	get_textures(t_data *data);
+//------------------
+
+//----cast_walls.c----
+int		cast_walls(t_data *data);
+//--------------------
+
+//----cast_walls2.c----
+void	find_wall_height(t_data *data);
+void	find_where_was_the_hit(t_data *data);
+void	put_vertical_line(t_data *data, int i);
+//--------------------
+
+//----cast_floor.c----
+void	cast_floor(t_data *data);
+//--------------------
 
 #endif
