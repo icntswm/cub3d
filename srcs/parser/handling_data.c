@@ -54,13 +54,13 @@ int	param_selection(int i, t_data *data)
 	else if (i > 0 && i_isnt_zero_cmp(i, "EA", data))
 		i = data_clipping(i + 2, data, &data->ea);
 	else if (i == 0 && i_is_zero_color(i, 'F', data))
-		i = color_handling(i + 1, data);
+		i = color_handling(i + 1, data, 'F');
 	else if (i > 0 && i_isnt_zero_color(i, 'F', data))
-		i = color_handling(i + 1, data);
+		i = color_handling(i + 1, data, 'F');
 	else if (i == 0 && i_is_zero_color(i, 'C', data))
-		i = color_handling(i + 1, data);
+		i = color_handling(i + 1, data, 'C');
 	else if (i > 0 && i_isnt_zero_color(i, 'C', data))
-		i = color_handling(i + 1, data);
+		i = color_handling(i + 1, data, 'C');
 	return (i);
 }
 
@@ -80,6 +80,6 @@ void	handling_data(t_data *data)
 			break ;
 		i++;
 	}
-	data_validation(data);
+	// data_validation(data);
 	read_map(i, data);
 }

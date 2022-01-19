@@ -90,5 +90,5 @@ void	map_error(t_data *data)
 	}
 	if (!data->player_char)
 		ft_error(data, "player_char");
-	check_path_around_player(data);
+	// check_path_around_player(data);
 }

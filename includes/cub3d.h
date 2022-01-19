@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: squickfi <squickfi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fkenned <fkenned@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:56:54 by squickfi          #+#    #+#             */
-/*   Updated: 2022/01/19 13:08:33 by squickfi         ###   ########.fr       */
+/*   Updated: 2022/01/19 16:10:00 by fkenned          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ void	reaplace_file(t_data *data, int fd_file);
 void	map_parser(char *file, t_data *data);
 void	make_hex(t_data *data);
 void	handling_data(t_data *data);
-int		color_handling(int i, t_data *data);
+int		color_handling(int i, t_data *data, char color);
 void	read_map(int i, t_data *data);
 void	map_error(t_data *data);
 

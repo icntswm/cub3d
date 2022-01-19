@@ -5,7 +5,7 @@ int	to_hex(int r, int g, int b)
 	return (r << 16 | g << 8 | b);
 }
 
-void	hext_char_to_int(t_data *data, char **array_atoi)
+void	hext_char_to_int(t_data *data, char **array_atoi, char color)
 {
 	long long	r;
 	long long	g;
@@ -18,9 +18,9 @@ void	hext_char_to_int(t_data *data, char **array_atoi)
 	b = ft_atoi(array_atoi[2]);
 	if (r > 255 || g > 255 || b > 255)
 		ft_error(data, "rgb");
-	if (data->floor == -1)
+	if (color == 'F')
 		data->floor = to_hex(r, g, b);
-	else if (data->ceiling == -1)
+	else if (color == 'C')
 		data->ceiling = to_hex(r, g, b);
 }
 
@@ -52,7 +52,7 @@ int	color_handling3(int i, int start, t_data *data, char **array_atoi)
 	return (i);
 }
 
-int	color_handling2(int i, t_data *data, char **array_atoi)
+int	color_handling2(int i, t_data *data, char **array_atoi, char color)
 {
 	int	start;
 
@@ -70,7 +70,7 @@ int	color_handling2(int i, t_data *data, char **array_atoi)
 		i = color_handling3(i, start, data, array_atoi);
 		if (data->repfile[i] == '\n')
 		{
-			hext_char_to_int(data, array_atoi);
+			hext_char_to_int(data, array_atoi, color);
 			break ;
 		}
 		i++;
@@ -78,7 +78,7 @@ int	color_handling2(int i, t_data *data, char **array_atoi)
 	return (i);
 }
 
-int	color_handling(int i, t_data *data)
+int	color_handling(int i, t_data *data, char color)
 {
 	char	**array_atoi;
 	int		j;
@@ -89,7 +89,7 @@ int	color_handling(int i, t_data *data)
 		array_atoi[j++] = NULL;
 	if (!array_atoi)
 		exit(1);
-	i = color_handling2(i, data, array_atoi);
+	i = color_handling2(i, data, array_atoi, color);
 	if (array_atoi)
 		free_array(array_atoi);
 	return (i);
