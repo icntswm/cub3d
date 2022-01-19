@@ -10,7 +10,8 @@ HEADERS = cub3d.h
 
 MLX = -framework OpenGL -framework AppKit -lmlx -I includes/
 
-MAIN_SRC = cast_walls.c\
+MAIN_SRC = cast_floor.c\
+		cast_walls.c\
 		cast_walls2.c\
 		get_next_line\
 		keys.c\
