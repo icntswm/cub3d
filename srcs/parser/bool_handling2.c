@@ -30,12 +30,16 @@ bool	check_s_t(char a, int check)
 	return (a == ' ' || a == '\t');
 }
 
-bool    check_cub(char *str)
+bool    check_extension(char *str, int check)
 {
     int i;
 
     i = ft_strlen(str) - 1;
-    if (str[i] == 'm' && str[i - 1] == 'p' && str[i - 2] == 'x' && str[i - 3] == '.')
+	if (!check && str[i] == 'b' && str[i - 1] == 'u' && str[i - 2] == 'c'
+		&& str[i - 3] == '.' && i - 3 != 0 && str[i - 4] != '/')
+		return (true);
+	if (check && str[i] == 'm' && str[i - 1] == 'p' && str[i - 2] == 'x'
+		&& str[i - 3] == '.' && i - 3 != 0 && str[i - 4] != '/')
         return (true);
     return (false);
 }

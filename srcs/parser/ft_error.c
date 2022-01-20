@@ -20,7 +20,7 @@ void	ft_error2(char *error)
 		write(2, "Error\nmultiple players on the map\n", 34);
 	else if (ft_strncmp(error, "player", 6) == 0)
 		write(2, "Error\nplayer not found\n", 23);
-	else if (ft_strncmp(error, "ext", 6) == 0)
+	else if (ft_strncmp(error, "ext", 3) == 0)
 		write(2, "Error\nwrong extension\n", 22);
 }
 
