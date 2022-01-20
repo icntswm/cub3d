@@ -6,7 +6,7 @@
 /*   By: squickfi <squickfi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 13:01:36 by squickfi          #+#    #+#             */
-/*   Updated: 2022/01/19 13:16:52 by squickfi         ###   ########.fr       */
+/*   Updated: 2022/01/20 13:56:38 by squickfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,36 +32,12 @@ void	move_backward(t_data *data)
 		data->player.y -= data->player.dir_y * SPEED;
 }
 
-void	turn_left(t_data *data)
+void	move_left(t_data *data)
 {
-	double	old_dir_x;
-	double	old_plane_x;
-
-	old_dir_x = data->player.dir_x;
-	old_plane_x = data->player.plane_x;
-	data->player.dir_x = data->player.dir_x * cos(ROT_SPEED) - \
-		data->player.dir_y * sin(ROT_SPEED);
-	data->player.dir_y = old_dir_x * sin(ROT_SPEED) + \
-		data->player.dir_y * cos(ROT_SPEED);
-	data->player.plane_x = data->player.plane_x * cos(ROT_SPEED) - \
-		data->player.plane_y * sin(ROT_SPEED);
-	data->player.plane_y = old_plane_x * sin(ROT_SPEED) + \
-		data->player.plane_y * cos(ROT_SPEED);
+	
 }
 
-void	turn_right(t_data *data)
+void	move_right(t_data *data)
 {
-	double	old_dir_x;
-	double	old_plane_x;
-
-	old_dir_x = data->player.dir_x;
-	old_plane_x = data->player.plane_x;
-	data->player.dir_x = data->player.dir_x * cos(-ROT_SPEED) \
-		- data->player.dir_y * sin(-ROT_SPEED);
-	data->player.dir_y = old_dir_x * sin(-ROT_SPEED) + \
-		data->player.dir_y * cos(-ROT_SPEED);
-	data->player.plane_x = data->player.plane_x * cos(-ROT_SPEED) - \
-		data->player.plane_y * sin(-ROT_SPEED);
-	data->player.plane_y = old_plane_x * sin(-ROT_SPEED) + \
-		data->player.plane_y * cos(-ROT_SPEED);
+	
 }

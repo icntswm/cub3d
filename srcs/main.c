@@ -7,28 +7,18 @@ int	ft_exit(t_data *data)
 	exit(0);
 }
 
-void	init_coords(t_data *data, int x, int y)
+void	init_coords(t_data *data)
 {
-	if (data->plr_ch == 'N')
-		x = -1;
+	data->player.dir_x = -1;
+	data->player.dir_y = 0;
+	data->player.plane_x = 0;
+	data->player.plane_y = 0.66;
+	if (data->plr_ch == 'W')
+		rotate(data, 0, 1);
 	else if (data->plr_ch == 'S')
-		x = 1;
+		rotate(data, -1, 0);
 	else if (data->plr_ch == 'E')
-		y = 1;
-	else
-		y = -1;
-	data->player.dir_x = x;
-	data->player.dir_y = y;
-	if (x)
-	{
-		data->player.plane_x = 0;
-		data->player.plane_y = 0.66;
-	}
-	else
-	{
-		data->player.plane_x = 0.66;
-		data->player.plane_y = 0;
-	}
+		rotate(data, 0, -1);
 }
 
 void	init_player_data(t_data *data)
@@ -36,7 +26,7 @@ void	init_player_data(t_data *data)
 	int	i;
 	int	j;
 
-	init_coords(data, 0, 0);
+	init_coords(data);
 	i = 0;
 	while (data->map[i])
 	{

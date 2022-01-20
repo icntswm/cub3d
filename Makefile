@@ -14,6 +14,7 @@ MAIN_SRC = cast_walls.c\
 		cast_walls2.c\
 		keys.c\
 		key_funcs.c\
+		key_funcs2.c\
 		main.c\
 		mouse.c\
 		textures.c
@@ -55,6 +56,8 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
+test: all clean
+
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re test

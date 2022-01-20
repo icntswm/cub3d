@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkenned <fkenned@student.42.fr>            +#+  +:+       +#+        */
+/*   By: squickfi <squickfi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:56:54 by squickfi          #+#    #+#             */
-/*   Updated: 2022/01/19 18:47:51 by fkenned          ###   ########.fr       */
+/*   Updated: 2022/01/20 13:29:20 by squickfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ typedef struct s_keys
 	int	backward;
 	int	left;
 	int	right;
+	int	left_turn;
+	int	right_turn;
 }		t_keys;
 
 typedef struct s_data
@@ -174,17 +176,23 @@ void	free_array(char **array);
 //--------------
 
 //----keys.c----
-void	move_forward(t_data *data);
-void	move_backward(t_data *data);
-void	turn_left(t_data *data);
-void	turn_right(t_data *data);
-//--------------
-
-//----key_funcs.c----
 int		keyhook(int keycode, t_data *data);
 int		keyrelease(int keycode, t_data *data);
 void	press_keys(t_data *data);
+//--------------
+
+//----key_funcs.c----
+void	move_forward(t_data *data);
+void	move_backward(t_data *data);
+void	move_left(t_data *data);
+void	move_right(t_data *data);
 //-------------------
+
+//----key_funcs2.c----
+void	turn_left(t_data *data);
+void	turn_right(t_data *data);
+void	rotate(t_data *data, int cos_val, int sin_val);
+//--------------------
 
 //----mouse.c----
 int		mousehook(int x, int y, t_data *data);
