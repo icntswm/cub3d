@@ -1,8 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: squickfi <squickfi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/22 16:38:38 by squickfi          #+#    #+#             */
+/*   Updated: 2022/01/22 16:38:40 by squickfi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
 int	ft_exit(t_data *data)
 {
+	int	i;
+
+	i = 0;
+	while (data->map[i])
+	{
+		free(data->map[i]);
+		i++;
+	}
+	free(data->map);
+	mlx_destroy_image(data->mlx.mlx, data->tex.no.img);
+	mlx_destroy_image(data->mlx.mlx, data->tex.so.img);
+	mlx_destroy_image(data->mlx.mlx, data->tex.ea.img);
+	mlx_destroy_image(data->mlx.mlx, data->tex.we.img);
 	mlx_destroy_window (data->mlx.mlx, data->mlx.win);
 	exit(0);
 }
@@ -50,7 +74,6 @@ void	init_player_data(t_data *data)
 int	render_image(t_data *data)
 {
 	press_keys(data);
-	// cast_floor(data);
 	cast_walls(data);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, \
 		data->tex.picture.img, 0, 0);

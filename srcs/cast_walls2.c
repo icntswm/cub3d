@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cast_walls2.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: squickfi <squickfi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/22 16:32:47 by squickfi          #+#    #+#             */
+/*   Updated: 2022/01/22 16:32:48 by squickfi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	find_wall_height(t_data *data)
@@ -47,8 +59,6 @@ static void	put_line_cycle(t_data *data, t_img *img, int i, int mirror)
 			my_mlx_pixel_put(&data->tex.picture, i, j, data->floor);
 		else
 		{
-		// if (j >= data->player.draw_start && j < data->player.draw_end)
-		// {
 			if (mirror)
 				x = (int)((double)img->width * (1.0 - data->player.wall_hit));
 			else
@@ -57,7 +67,6 @@ static void	put_line_cycle(t_data *data, t_img *img, int i, int mirror)
 				data->player.wall_start) * (j - data->player.wall_start));
 			my_mlx_pixel_put(&data->tex.picture, i, j, get_pixel_color(img, \
 				x, y));
-		// }
 		}
 		j++;
 	}

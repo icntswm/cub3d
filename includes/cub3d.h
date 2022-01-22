@@ -6,7 +6,7 @@
 /*   By: squickfi <squickfi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:56:54 by squickfi          #+#    #+#             */
-/*   Updated: 2022/01/22 16:26:37 by squickfi         ###   ########.fr       */
+/*   Updated: 2022/01/22 16:38:10 by squickfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ bool	check_plr(char a);
 //checking spaces and tabs
 bool	check_s_t(char a, int check);
 //checking .cub and .xpm
-bool    check_extension(char *str, int check);
+bool	check_extension(char *str, int check);
 
 //error
 void	ft_error(t_data *data, char *error);
