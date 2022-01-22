@@ -47,6 +47,8 @@ static void	put_line_cycle(t_data *data, t_img *img, int i, int mirror)
 			my_mlx_pixel_put(&data->tex.picture, i, j, data->floor);
 		else
 		{
+		// if (j >= data->player.draw_start && j < data->player.draw_end)
+		// {
 			if (mirror)
 				x = (int)((double)img->width * (1.0 - data->player.wall_hit));
 			else
@@ -55,6 +57,7 @@ static void	put_line_cycle(t_data *data, t_img *img, int i, int mirror)
 				data->player.wall_start) * (j - data->player.wall_start));
 			my_mlx_pixel_put(&data->tex.picture, i, j, get_pixel_color(img, \
 				x, y));
+		// }
 		}
 		j++;
 	}

@@ -6,7 +6,7 @@
 /*   By: squickfi <squickfi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 13:01:36 by squickfi          #+#    #+#             */
-/*   Updated: 2022/01/20 13:56:38 by squickfi         ###   ########.fr       */
+/*   Updated: 2022/01/20 14:02:10 by squickfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ void	move_backward(t_data *data)
 		data->player.y -= data->player.dir_y * SPEED;
 }
 
-void	move_left(t_data *data)
-{
+// void	move_left(t_data *data)
+// {
 	
-}
+// }
 
-void	move_right(t_data *data)
-{
+// void	move_right(t_data *data)
+// {
 	
-}
+// }

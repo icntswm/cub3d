@@ -48,7 +48,9 @@ void	press_keys(t_data *data)
 	if (data->keys.backward)
 		move_backward(data);
 	if (data->keys.left)
-		move_left(data);
+		turn_left(data);
+		// move_left(data);
 	if (data->keys.right)
-		move_right(data);
+		turn_right(data);
+		// move_right(data);
 }

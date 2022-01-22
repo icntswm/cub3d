@@ -50,6 +50,7 @@ void	init_player_data(t_data *data)
 int	render_image(t_data *data)
 {
 	press_keys(data);
+	// cast_floor(data);
 	cast_walls(data);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, \
 		data->tex.picture.img, 0, 0);
