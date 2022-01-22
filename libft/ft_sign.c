@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sign.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkenned <fkenned@student.42.fr>            +#+  +:+       +#+        */
+/*   By: squickfi <squickfi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 16:51:04 by fkenned           #+#    #+#             */
-/*   Updated: 2022/01/22 16:51:05 by fkenned          ###   ########.fr       */
+/*   Updated: 2022/01/22 17:55:46 by squickfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_sign(int num)
+int	ft_sign(double num)
 {
 	if (num < 0)
 		return (-1);

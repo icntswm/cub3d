@@ -6,7 +6,7 @@
 /*   By: squickfi <squickfi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 13:01:36 by squickfi          #+#    #+#             */
-/*   Updated: 2022/01/22 16:34:22 by squickfi         ###   ########.fr       */
+/*   Updated: 2022/01/22 18:00:32 by squickfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,20 @@
 void	move_forward(t_data *data)
 {
 	if (data->map[(int)(data->player.x + data->player.dir_x * \
-		(SPEED + 0.1))][(int)(data->player.y)] != '1')
+		(SPEED + 0.1))][(int)(data->player.y)] == '0')
 		data->player.x += data->player.dir_x * SPEED;
 	if (data->map[(int)(data->player.x)][(int)(data->player.y + \
-		data->player.dir_y * (SPEED + 0.1))] != '1')
+		data->player.dir_y * (SPEED + 0.1))] == '0')
 		data->player.y += data->player.dir_y * SPEED;
 }
 
 void	move_backward(t_data *data)
 {
 	if (data->map[(int)(data->player.x - data->player.dir_x * \
-		(SPEED + 0.1))][(int)(data->player.y)] != '1')
+		(SPEED + 0.1))][(int)(data->player.y)] == '0')
 		data->player.x -= data->player.dir_x * SPEED;
 	if (data->map[(int)(data->player.x)][(int)(data->player.y - \
-		data->player.dir_y * (SPEED + 0.1))] != '1')
+		data->player.dir_y * (SPEED + 0.1))] == '0')
 		data->player.y -= data->player.dir_y * SPEED;
 }
 
@@ -41,10 +41,10 @@ void	strafe(t_data *data, int dir)
 	new_pos_x = data->player.x + data->player.dir_y * SPEED * -dir;
 	if ((data->map[(int)data->player.x] \
 		[(int)(new_pos_y + 0.1 \
-		* ft_sign(new_pos_y - data->player.y))]) != '1')
+		* ft_sign(new_pos_y - data->player.y))]) == '0')
 		data->player.y = new_pos_y;
 	if ((data->map[(int)(new_pos_x + 0.1 \
 		* ft_sign(new_pos_x - data->player.x))] \
-		[(int)data->player.y]) != '1')
+		[(int)data->player.y]) == '0')
 		data->player.x = new_pos_x;
 }
