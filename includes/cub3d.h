@@ -165,8 +165,8 @@ bool	check_fl_cel_error(char a);
 bool	check_plr(char a);
 //checking spaces and tabs
 bool	check_s_t(char a, int check);
-//checking .cub
-bool    check_cub(char *str);
+//checking .cub and .xpm
+bool    check_extension(char *str, int check);
 
 //error
 void	ft_error(t_data *data, char *error);

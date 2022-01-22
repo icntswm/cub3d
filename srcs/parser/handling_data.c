@@ -45,8 +45,8 @@ void	data_validation(t_data *data)
 	if (access(data->no, R_OK) || access(data->so, R_OK)
 		|| access(data->we, R_OK) || access(data->ea, R_OK))
 		ft_error(data, "text_error");
-	if (!check_cub(data->no) || !check_cub(data->no)
-		|| !check_cub(data->we) || !check_cub(data->ea))
+	if (!check_extension(data->no, 1) || !check_extension(data->no, 1)
+		|| !check_extension(data->we, 1) || !check_extension(data->ea, 1))
 		ft_error(data, "ext");
 }
 
