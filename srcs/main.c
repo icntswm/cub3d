@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: squickfi <squickfi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fkenned <fkenned@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 16:38:38 by squickfi          #+#    #+#             */
-/*   Updated: 2022/01/22 16:38:40 by squickfi         ###   ########.fr       */
+/*   Updated: 2022/01/22 18:13:37 by fkenned          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	init_player_data(t_data *data)
 			{
 				data->player.y = (double)j + 0.5;
 				data->player.x = (double)i + 0.5;
+				data->map[(int)data->player.x][(int)data->player.y] = '0';
 				data->mlx.prev_x_mouse = -1;
 				data->mlx.is_mouse_active = -1;
 				return ;

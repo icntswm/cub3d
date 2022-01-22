@@ -2,11 +2,11 @@ NAME = cub3d
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g -I includes/ -I libft/
 
 LIBFT = -L libft/ -lft
 
-HEADERS = cub3d.h
+HEADERS = includes/cub3d.h
 
 MLX = -framework OpenGL -framework AppKit -lmlx -I includes/
 
@@ -44,10 +44,10 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C libft
-	$(CC) $(MLX) $(LIBFT) $(OBJ) -o $(NAME)
+	$(CC) $(FLAGS) $(MLX) $(LIBFT) $(OBJ) -o $(NAME)
 
-%.o: %.c
-	$(CC) $(FLAGS) -I includes/ -c $< -o $@
+%.o: %.c $(HEADERS)
+	$(CC) $(FLAGS) -c $< -o $@
 
 clean:
 	make fclean -C libft
