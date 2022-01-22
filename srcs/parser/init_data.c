@@ -6,7 +6,7 @@
 /*   By: fkenned <fkenned@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 16:34:37 by fkenned           #+#    #+#             */
-/*   Updated: 2022/01/22 18:21:16 by fkenned          ###   ########.fr       */
+/*   Updated: 2022/01/22 19:00:24 by fkenned          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	init_data(t_data *data)
 {
-	ft_bzero(data, sizeof(t_data));
 	data->floor = -1;
 	data->ceiling = -1;
 }

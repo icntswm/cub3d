@@ -6,7 +6,7 @@
 /*   By: fkenned <fkenned@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 16:34:46 by fkenned           #+#    #+#             */
-/*   Updated: 2022/01/22 18:21:19 by fkenned          ###   ########.fr       */
+/*   Updated: 2022/01/22 19:03:22 by fkenned          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,5 @@ void	map_error(t_data *data)
 		}
 	}
 	if (!data->plr_ch)
-		ft_error(data, "plr_ch");
+		ft_error(data, "player");
 }
