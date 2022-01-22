@@ -7,10 +7,13 @@ void	turn_mouse_left(t_data *data, double x)
 
 	old_dir_x = data->player.dir_x;
 	old_plane_x = data->player.plane_x;
-	data->player.dir_x = data->player.dir_x * cos(x) - data->player.dir_y * sin(x);
+	data->player.dir_x = data->player.dir_x * cos(x) - \
+		data->player.dir_y * sin(x);
 	data->player.dir_y = old_dir_x * sin(x) + data->player.dir_y * cos(x);
-	data->player.plane_x = data->player.plane_x * cos(x) - data->player.plane_y * sin(x);
-	data->player.plane_y = old_plane_x * sin(x) + data->player.plane_y * cos(x);
+	data->player.plane_x = data->player.plane_x * cos(x) - \
+		data->player.plane_y * sin(x);
+	data->player.plane_y = old_plane_x * sin(x) + \
+		data->player.plane_y * cos(x);
 }
 
 void	turn_mouse_right(t_data *data, double x)
@@ -20,10 +23,13 @@ void	turn_mouse_right(t_data *data, double x)
 
 	old_dir_x = data->player.dir_x;
 	old_plane_x = data->player.plane_x;
-	data->player.dir_x = data->player.dir_x * cos(-x) - data->player.dir_y * sin(-x);
+	data->player.dir_x = data->player.dir_x * cos(-x) - \
+		data->player.dir_y * sin(-x);
 	data->player.dir_y = old_dir_x * sin(-x) + data->player.dir_y * cos(-x);
-	data->player.plane_x = data->player.plane_x * cos(-x) - data->player.plane_y * sin(-x);
-	data->player.plane_y = old_plane_x * sin(-x) + data->player.plane_y * cos(-x);
+	data->player.plane_x = data->player.plane_x * cos(-x) - \
+		data->player.plane_y * sin(-x);
+	data->player.plane_y = old_plane_x * sin(-x) + \
+		data->player.plane_y * cos(-x);
 }
 
 int	mousehook(int x, int y, t_data *data)
@@ -35,16 +41,16 @@ int	mousehook(int x, int y, t_data *data)
 		return (0);
 	}
 	if (x < data->mlx.prev_x_mouse)
-		turn_mouse_left(data, (double)(data->mlx.prev_x_mouse - x) / 200.0);
+		turn_mouse_left(data, (double)(data->mlx.prev_x_mouse - x) / 300.0);
 	else if (x > data->mlx.prev_x_mouse)
-		turn_mouse_right(data, (double)(x - data->mlx.prev_x_mouse) / 200.0);
+		turn_mouse_right(data, (double)(x - data->mlx.prev_x_mouse) / 300.0);
 
 	if (y < data->mlx.prev_y_mouse)
-		if (data->mlx.prev_y_mouse - y + data->mlx.view_height < 100)
+		if (data->mlx.prev_y_mouse - y + data->mlx.view_height < HEIGHT / 10)
 			data->mlx.view_height += data->mlx.prev_y_mouse - y;
 
 	if (y > data->mlx.prev_y_mouse)
-		if (y - data->mlx.prev_y_mouse + data->mlx.view_height > -100)
+		if (y - data->mlx.prev_y_mouse + data->mlx.view_height > -(HEIGHT / 10))
 			data->mlx.view_height -= y - data->mlx.prev_y_mouse;
 
 	data->mlx.prev_x_mouse = x;

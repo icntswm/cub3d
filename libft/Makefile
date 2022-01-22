@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fkenned <fkenned@student.21-school.ru>     +#+  +:+       +#+         #
+#    By: squickfi <squickfi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/26 17:38:29 by fkenned           #+#    #+#              #
-#    Updated: 2021/11/12 18:11:44 by fkenned          ###   ########.fr        #
+#    Updated: 2022/01/22 15:49:58 by squickfi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRCS	=	ft_atoi.c		\
 			ft_putstr_fd.c	\
 			ft_putendl_fd.c	\
 			ft_putnbr_fd.c	\
+			ft_sign.c		\
 			ft_strmapi.c	\
 			ft_itoa.c		\
 			ft_split.c		

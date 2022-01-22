@@ -5,9 +5,9 @@ int	keyhook(int keycode, t_data *data)
 {
 	if (keycode == ESC)
 		ft_exit(data);
-	if (keycode == W || keycode == UP)
+	if (keycode == W)
 		data->keys.forward = 1;
-	if (keycode == S || keycode == DOWN)
+	if (keycode == S)
 		data->keys.backward = 1;
 	if (keycode == A)
 		data->keys.left = 1;
@@ -22,9 +22,9 @@ int	keyhook(int keycode, t_data *data)
 
 int	keyrelease(int keycode, t_data *data)
 {
-	if (keycode == W || keycode == UP)
+	if (keycode == W)
 		data->keys.forward = 0;
-	if (keycode == S || keycode == DOWN)
+	if (keycode == S)
 		data->keys.backward = 0;
 	if (keycode == A)
 		data->keys.left = 0;
@@ -48,9 +48,7 @@ void	press_keys(t_data *data)
 	if (data->keys.backward)
 		move_backward(data);
 	if (data->keys.left)
-		turn_left(data);
-		// move_left(data);
+		strafe(data, 1);
 	if (data->keys.right)
-		turn_right(data);
-		// move_right(data);
+		strafe(data, -1);
 }

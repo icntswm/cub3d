@@ -6,7 +6,7 @@
 /*   By: squickfi <squickfi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:56:54 by squickfi          #+#    #+#             */
-/*   Updated: 2022/01/20 13:29:20 by squickfi         ###   ########.fr       */
+/*   Updated: 2022/01/22 16:26:37 by squickfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,8 +184,7 @@ void	press_keys(t_data *data);
 //----key_funcs.c----
 void	move_forward(t_data *data);
 void	move_backward(t_data *data);
-void	move_left(t_data *data);
-void	move_right(t_data *data);
+void	strafe(t_data *data, int dir);
 //-------------------
 
 //----key_funcs2.c----
