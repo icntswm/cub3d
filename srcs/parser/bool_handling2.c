@@ -6,7 +6,7 @@
 /*   By: fkenned <fkenned@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 16:55:34 by fkenned           #+#    #+#             */
-/*   Updated: 2022/01/19 18:55:24 by fkenned          ###   ########.fr       */
+/*   Updated: 2022/01/22 16:32:38 by fkenned          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,16 @@ bool	check_s_t(char a, int check)
 	return (a == ' ' || a == '\t');
 }
 
-bool    check_extension(char *str, int check)
+bool	check_extension(char *str, int check)
 {
-    int i;
+	int	i;
 
-    i = ft_strlen(str) - 1;
+	i = ft_strlen(str) - 1;
 	if (!check && str[i] == 'b' && str[i - 1] == 'u' && str[i - 2] == 'c'
 		&& str[i - 3] == '.' && i - 3 != 0 && str[i - 4] != '/')
 		return (true);
 	if (check && str[i] == 'm' && str[i - 1] == 'p' && str[i - 2] == 'x'
 		&& str[i - 3] == '.' && i - 3 != 0 && str[i - 4] != '/')
-        return (true);
-    return (false);
+		return (true);
+	return (false);
 }

@@ -1,4 +1,3 @@
-
 #include "get_next_line.h"
 
 int	first_check(int fd, char **line, char **buf, ssize_t *ret)
