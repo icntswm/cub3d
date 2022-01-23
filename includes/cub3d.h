@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkenned <fkenned@student.42.fr>            +#+  +:+       +#+        */
+/*   By: squickfi <squickfi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:56:54 by squickfi          #+#    #+#             */
-/*   Updated: 2022/01/22 18:21:37 by fkenned          ###   ########.fr       */
+/*   Updated: 2022/01/23 15:47:01 by squickfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,25 +78,6 @@ typedef struct s_player
 	int		hit;
 }			t_player;
 
-typedef struct s_floor
-{
-	double	ray_dir_x_l;
-	double	ray_dir_y_l;
-	double	ray_dir_x_r;
-	double	ray_dir_y_r;
-	int		pos;
-	double	pos_z;
-	double	row_distance;
-	double	step_x;
-	double	step_y;
-	double	x;
-	double	y;
-	int		cell_x;
-	int		cell_y;
-	int		tex_x;
-	int		tex_y;
-}			t_floor;
-
 typedef struct s_tex
 {
 	struct s_img	picture;
@@ -139,7 +120,6 @@ typedef struct s_data
 	char			**map;
 	struct s_mlx	mlx;
 	struct s_player	player;
-	struct s_floor	floor_cast;
 	struct s_tex	tex;
 	struct s_keys	keys;
 }					t_data;
