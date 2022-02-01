@@ -1,4 +1,5 @@
 NAME = cub3D
+NAME_L = cub3D_linux
 
 CC = gcc
 
@@ -9,6 +10,7 @@ LIBFT = -L libft/ -lft
 HEADERS = includes/cub3d.h
 
 MLX = -framework OpenGL -framework AppKit -lmlx -I includes/
+MLX_LINUX = -I includes/ -lmlx -lm -lbsd -lX11 -lXext
 
 MAIN_SRC = cast_walls.c\
 		cast_walls2.c\
@@ -42,6 +44,12 @@ OBJ = $(SRC:c=o)
 
 all: $(NAME)
 
+linux: $(NAME_L)
+
+$(NAME_L): $(OBJ)
+	make -C libft
+	$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(MLX_LINUX) -o $(NAME_L)
+
 $(NAME): $(OBJ)
 	make -C libft
 	$(CC) $(FLAGS) $(MLX) $(LIBFT) $(OBJ) -o $(NAME)
@@ -54,10 +62,10 @@ clean:
 	rm -f $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(NAME_L)
 
 test: all clean
 
 re: fclean all
 
-.PHONY: all clean fclean re test
+.PHONY: all clean fclean re test linux
