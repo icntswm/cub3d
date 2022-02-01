@@ -10,6 +10,8 @@ Compilation commands:
 `make clean` - deleting object files (.o)
 
 `make fclean` - deleting object files (.o) and executable file
+
+`make linux` - compiling for linux
 ***
 Program launch: `./cub3D *map*`
 ***
