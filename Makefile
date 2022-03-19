@@ -3,13 +3,14 @@ NAME_L = cub3D_linux
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror -g -I includes/ -I libft/
+CFLAGS = -Wall -Wextra -Werror -g -I includes/ -I libft/ -MMD
 
 LIBFT = -L libft/ -lft
 
 HEADERS = includes/cub3d.h
 
-MLX = -framework OpenGL -framework AppKit -lmlx -I includes/
+# MLX = -framework OpenGL -framework AppKit -lmlx -I includes/
+MLX_FLAGS = -L mlx -l mlx -framework OpenGL -framework AppKit
 MLX_LINUX = -I includes/ -lmlx -lm -lbsd -lX11 -lXext
 
 MAIN_SRC = cast_walls.c\
@@ -41,31 +42,43 @@ SRC = $(addprefix srcs/, $(MAIN_SRC))\
 		$(addprefix srcs/get_next_line/, $(GNL))
 
 OBJ = $(SRC:c=o)
+DEP = $(OBJ:o=d)
+
+PATH_LIB = libft/
+LIB = libft/libft.a
 
 all: $(NAME)
 
-linux: $(NAME_L)
-
-$(NAME_L): $(OBJ)
-	make -C libft
-	$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(MLX_LINUX) -o $(NAME_L)
-
-$(NAME): $(OBJ)
-	make -C libft
-	$(CC) $(FLAGS) $(MLX) $(LIBFT) $(OBJ) -o $(NAME)
+$(NAME): $(OBJ) $(HDRS)
+	@echo "\n"
+	@make -C mlx 2>/dev/null
+	@make -C $(PATH_LIB)
+	@echo "\033[0;32mCompiling cub3d...✅"
+	@$(CC) $(CFLAGS) $(MLX_FLAGS) -I mlx $(OBJ) $(LIB) -I. -o $(NAME)
+	@echo "\n\033[0;33m🥂Done and ready!🥂"
 
 %.o: %.c $(HEADERS)
-	$(CC) $(FLAGS) -c $< -o $@
+	@printf "\033[0;33mGenerating cub3d objects 🔜 %-33.33s\r" $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	make fclean -C libft
-	rm -f $(OBJ)
+	@echo "\033[0;31mCleaning libft..."
+	@make clean -C $(PATH_LIB)
+	@echo "\033[0;31mCleaning mlx..."
+	@make clean -C mlx
+	@echo "\nRemoving binaries..."
+	@rm -f $(OBJ) $(DEP)
+	@echo "\n\033[0;32mCleaning process is competed!"
 
 fclean: clean
-	rm -f $(NAME) $(NAME_L)
+	@rm -f $(NAME) $(NAME_L)
+	@make fclean -C $(PATH_LIB)
+	@make fclean -C mlx
 
 test: all clean
 
 re: fclean all
 
 .PHONY: all clean fclean re test linux
+
+include $(wildcard $(DEP))

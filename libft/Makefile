@@ -34,9 +34,8 @@ SRCS	=	ft_atoi.c		\
 			ft_sign.c		\
 			ft_strmapi.c	\
 			ft_itoa.c		\
-			ft_split.c		
-	
-B_SRCS	=	ft_lstnew.c		\
+			ft_split.c		\
+			ft_lstnew.c		\
 			ft_lstadd_front.c	\
 			ft_lstsize.c	\
 			ft_lstlast.c	\
@@ -45,33 +44,30 @@ B_SRCS	=	ft_lstnew.c		\
 			ft_lstiter.c
 
 OBJS	=	${SRCS:.c=.o}
+DEPS	=	${OBJS:.o=.d}
 
 L_HEAD	=	libft.h
-
-B_OBJS	=	${B_SRCS:.c=.o}
 
 NAME	=	libft.a
 RM		=	rm -f
 CC		=	gcc
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror -MMD
 
 %.o: %.c	${L_HEAD}
-			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+	@${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJS}
-			ar rc ${NAME} ${OBJS}
-			ranlib ${NAME}
+	@ar rc ${NAME} ${OBJS}
+	@ranlib ${NAME}
 
 all:		${NAME}
 
 clean:
-			${RM} ${OBJS} ${B_OBJS}
+	@${RM} ${OBJS} ${DEPS}
 
 fclean:		clean
-			${RM} ${NAME}
+	@${RM} ${NAME}
 
-re:			fclean all
+re:			clean fclean all
 
-bonus:		${OBJS} ${B_OBJS}
-			ar rc ${NAME} ${OBJS} ${B_OBJS}
-			ranlib ${NAME}
+include $(wildcard $(DEP))

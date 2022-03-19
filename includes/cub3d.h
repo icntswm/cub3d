@@ -8,7 +8,7 @@
 # include "../libft/libft.h"
 # include "get_next_line.h"
 # include <limits.h>
-# include <mlx.h>
+# include "mlx.h"
 # include <math.h>
 
 # define HEIGHT 1080
