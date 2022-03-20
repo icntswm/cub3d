@@ -9,9 +9,8 @@ LIBFT = -L libft/ -lft
 
 HEADERS = includes/cub3d.h
 
-# MLX = -framework OpenGL -framework AppKit -lmlx -I includes/
 MLX_FLAGS = -L mlx -l mlx -framework OpenGL -framework AppKit
-MLX_LINUX = -I includes/ -lmlx -lm -lbsd -lX11 -lXext
+# MLX_LINUX = -I includes/ -lmlx -lm -lbsd -lX11 -lXext
 
 MAIN_SRC = cast_walls.c\
 		cast_walls2.c\
@@ -63,17 +62,22 @@ $(NAME): $(OBJ) $(HDRS)
 
 clean:
 	@echo "\033[0;31mCleaning libft..."
-	@make clean -C $(PATH_LIB)
+	@make fclean -C $(PATH_LIB)
 	@echo "\033[0;31mCleaning mlx..."
 	@make clean -C mlx
 	@echo "\nRemoving binaries..."
 	@rm -f $(OBJ) $(DEP)
 	@echo "\n\033[0;32mCleaning process is competed!"
 
-fclean: clean
-	@rm -f $(NAME) $(NAME_L)
+fclean:
+	@echo "\033[0;31mCleaning libft..."
 	@make fclean -C $(PATH_LIB)
-	@make fclean -C mlx
+	@echo "\033[0;31mCleaning mlx..."
+	@make clean -C mlx
+	@echo "\nRemoving binaries..."
+	@rm -f $(OBJ) $(DEP)
+	@echo "\n\033[0;32mCleaning process is competed!"
+	@rm -f $(NAME) $(NAME_L)
 
 test: all clean
 
